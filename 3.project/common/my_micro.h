@@ -20,7 +20,7 @@ public:\
     const char* name() const{\
         return name##_;\
     }\
-    void set_##name(char *val){\
+    void set_##name(const char *val){\
         strncpy(name##_,val,256);\
     }
 

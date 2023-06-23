@@ -5,9 +5,10 @@
 #include "pb/MessageInfoBase.pb.h"
 
 class MessageInfo{
-    GETSETVAR(int,user_id)
+    GETSETVAR(int,publisher)
     GETSETVAR(int,message_id)
     GETSETSTR(10240,content)
+	GETSETVAR(int,publish_time)
 };
 
 

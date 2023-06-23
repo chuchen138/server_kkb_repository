@@ -19,14 +19,14 @@ friend_info.h
   FriendList
     user_id,UserBrief* friendList,UserBrief* blackList;
 
-  function:
+    function:
       add_friend
       delete_friend
       add_black
       delete_black
 
 时间：6月11日
-大体框架完成
+主要完成工作：大体框架完成
 添加文件 
     UserInfo.h 
         读取回写数据库内容，定义用户参数
@@ -66,7 +66,7 @@ user_info.h
     GETSETSTR(256,password)
 
 UserManager.h
-    userInfo users[10240];
+    userInfo users[10240]; // 用户数据存储
     GETSETVAR(int,user_count);
     void Init();
     public:
@@ -75,9 +75,9 @@ UserManager.h
     void Shutdown();
     void Restart();
     int ShowAll();
-    UserInfo* GetUser(int user_id);
-    int CreateUser(int user_id,char* user_name,char* pswd);
-    int DeleteUser(int user_id);
+    UserInfo* GetUser(int user_id); // 传入ID从用户信息池中得到用户信息的类
+    int CreateUser(int user_id,char* user_name,char* pswd); // 建立用户
+    int DeleteUser(int user_id); // 删除用户 根据用户ID
 
 RelationInfo.h
     private:
@@ -87,8 +87,8 @@ RelationInfo.h
     public:
     int *getFriendList();
     int *getBlackList();
-    int CheckFriend(int other_id);
-    int CheckBlack(int other_id);
+    int CheckFriend(int other_id); // 遍历好友列表，判断other_id是否为好友
+    int CheckBlack(int other_id); // 遍历黑名单列表，判断other_id是否在黑名单
     int AddFriend(int other_id);
     int AddBlack(int other_id);
     int DeleteFriend(int other_id);
@@ -134,3 +134,64 @@ PhotoManager.h
     
     PhotoInfo* GetPhoto(int user_id);
     int UpdatePhoto(int user_id,int publisher_id,int publish_time,int publish_message_id);
+
+
+
+6月13日
+主要完成工作：
+开始加入数据库, 添加测试文件 mydbtest.cpp mydb.cpp mydb.h
+为UserManager类完善成员方法。
+pb 添加文件 message_define.proto 定义消息类型，发送接收参数
+common 添加文件 mess_type.h 消息返回参数
+user_info_base中的全部变量：
+    user_id,user_name,nick_name,reg_time,from,login_time,
+    last_login_time,fresh_time,password,logout_time;
+UserManager类中
+    成员变量中加入数据库的参数。
+    Start方法，调用数据库，从数据库中得到用户数据。
+    Shutdown方法，写入数据库。
+    CheckEcist(int user_id); // 判断是否存在用户
+    添加LoginCheck(char *user_name,char *user_pswd);通过用户名和密码检测用户的方法；
+    添加getUserIDbyname();// 通过用户姓名得到ID；
+    int UpdateUserLoginTime(int user_id, int time_now); // 更新登录时间
+	int UpdateUserFreshTime(int user_id, int time_now); // 更新刷新时间
+UserInfo 类中
+    添加数据库相关变量（更新，删除）
+    退出时间
+RelationInfo类中添加
+	int GetFriendUserIdByIndex(int index);
+	int GetBlackUserIdByIndex(int index);
+RelationManager类中
+    int UserRelationInit(int user_id); // 关系初使化
+    
+
+6月14号
+主要完成工作，部分测试
+recv_buffer
+send_buffer
+Test() 测试随便选择用户名和密码建立用户，生成UserInfo
+getMessType()  得到消息类型，前三位。
+SocketInit()中socket 初始化。
+SocketAccept() 中建立连接。
+ClientClose()  客户端关闭。
+SocketCheckRecv() 网络连接中接收消息。
+SocketSendRsp()   网络恢复消息
+SocketClose()     服务器关闭。
+SetRspMessType()  恢复消息类型。
+main函数中，
+    随机使用用户名密码生成登录
+    在死循环中，一直监听收到的信息。
+    通过得到的消息类型进行不同处理。
+
+
+6月15日
+主要完成任务，完成客户端测试。
+随机生成用户名密码，连接服务器。
+send_buffer
+recv_buffer
+ProtoInit() 各种消息类型初始化
+SetReqMessType() 发送消息类型
+GetMessType() 
+RecvRsp() // 接收回复
+ClientSocketInit() // 建立连接
+

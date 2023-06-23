@@ -15,6 +15,7 @@ public:
     void Restart();
 
     RelationInfo* GetRelation(int user_id);
+	int UserRelationInit(int user_id);
     int AddFriend(int user_id,int other_id);
     int DeleteFriend(int user_id,int other_id);
     int AddBlack(int user_id,int other_id);

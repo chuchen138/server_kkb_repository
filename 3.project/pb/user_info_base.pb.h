@@ -154,6 +154,30 @@ class UserInfoBase : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 fresh_time() const;
   inline void set_fresh_time(::google::protobuf::uint32 value);
 
+  // optional string password = 10;
+  inline bool has_password() const;
+  inline void clear_password();
+  static const int kPasswordFieldNumber = 10;
+  inline const ::std::string& password() const;
+  inline void set_password(const ::std::string& value);
+  inline void set_password(const char* value);
+  inline void set_password(const char* value, size_t size);
+  inline ::std::string* mutable_password();
+  inline ::std::string* release_password();
+  inline void set_allocated_password(::std::string* password);
+
+  // optional string logout_time = 11;
+  inline bool has_logout_time() const;
+  inline void clear_logout_time();
+  static const int kLogoutTimeFieldNumber = 11;
+  inline const ::std::string& logout_time() const;
+  inline void set_logout_time(const ::std::string& value);
+  inline void set_logout_time(const char* value);
+  inline void set_logout_time(const char* value, size_t size);
+  inline ::std::string* mutable_logout_time();
+  inline ::std::string* release_logout_time();
+  inline void set_allocated_logout_time(::std::string* logout_time);
+
   // @@protoc_insertion_point(class_scope:sxg.UserInfoBase)
  private:
   inline void set_has_ver();
@@ -174,6 +198,10 @@ class UserInfoBase : public ::google::protobuf::Message {
   inline void clear_has_last_login_time();
   inline void set_has_fresh_time();
   inline void clear_has_fresh_time();
+  inline void set_has_password();
+  inline void clear_has_password();
+  inline void set_has_logout_time();
+  inline void clear_has_logout_time();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -185,10 +213,12 @@ class UserInfoBase : public ::google::protobuf::Message {
   ::google::protobuf::uint32 from_;
   ::google::protobuf::uint32 login_time_;
   ::google::protobuf::uint32 last_login_time_;
+  ::std::string* password_;
+  ::std::string* logout_time_;
   ::google::protobuf::uint32 fresh_time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   friend void  protobuf_AddDesc_user_5finfo_5fbase_2eproto();
   friend void protobuf_AssignDesc_user_5finfo_5fbase_2eproto();
@@ -400,6 +430,146 @@ inline ::google::protobuf::uint32 UserInfoBase::fresh_time() const {
 inline void UserInfoBase::set_fresh_time(::google::protobuf::uint32 value) {
   set_has_fresh_time();
   fresh_time_ = value;
+}
+
+// optional string password = 10;
+inline bool UserInfoBase::has_password() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void UserInfoBase::set_has_password() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void UserInfoBase::clear_has_password() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void UserInfoBase::clear_password() {
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    password_->clear();
+  }
+  clear_has_password();
+}
+inline const ::std::string& UserInfoBase::password() const {
+  return *password_;
+}
+inline void UserInfoBase::set_password(const ::std::string& value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void UserInfoBase::set_password(const char* value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+}
+inline void UserInfoBase::set_password(const char* value, size_t size) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  password_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserInfoBase::mutable_password() {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    password_ = new ::std::string;
+  }
+  return password_;
+}
+inline ::std::string* UserInfoBase::release_password() {
+  clear_has_password();
+  if (password_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = password_;
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserInfoBase::set_allocated_password(::std::string* password) {
+  if (password_ != &::google::protobuf::internal::kEmptyString) {
+    delete password_;
+  }
+  if (password) {
+    set_has_password();
+    password_ = password;
+  } else {
+    clear_has_password();
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string logout_time = 11;
+inline bool UserInfoBase::has_logout_time() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void UserInfoBase::set_has_logout_time() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void UserInfoBase::clear_has_logout_time() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void UserInfoBase::clear_logout_time() {
+  if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
+    logout_time_->clear();
+  }
+  clear_has_logout_time();
+}
+inline const ::std::string& UserInfoBase::logout_time() const {
+  return *logout_time_;
+}
+inline void UserInfoBase::set_logout_time(const ::std::string& value) {
+  set_has_logout_time();
+  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
+    logout_time_ = new ::std::string;
+  }
+  logout_time_->assign(value);
+}
+inline void UserInfoBase::set_logout_time(const char* value) {
+  set_has_logout_time();
+  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
+    logout_time_ = new ::std::string;
+  }
+  logout_time_->assign(value);
+}
+inline void UserInfoBase::set_logout_time(const char* value, size_t size) {
+  set_has_logout_time();
+  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
+    logout_time_ = new ::std::string;
+  }
+  logout_time_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserInfoBase::mutable_logout_time() {
+  set_has_logout_time();
+  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
+    logout_time_ = new ::std::string;
+  }
+  return logout_time_;
+}
+inline ::std::string* UserInfoBase::release_logout_time() {
+  clear_has_logout_time();
+  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = logout_time_;
+    logout_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserInfoBase::set_allocated_logout_time(::std::string* logout_time) {
+  if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
+    delete logout_time_;
+  }
+  if (logout_time) {
+    set_has_logout_time();
+    logout_time_ = logout_time;
+  } else {
+    clear_has_logout_time();
+    logout_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 

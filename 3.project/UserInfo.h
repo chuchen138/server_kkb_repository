@@ -19,6 +19,8 @@ public:
     GETSETVAR(int,last_login_time)
     GETSETVAR(int,fresh_time)
     GETSETSTR(256,password)
+	GETSETVAR(int,db_flag)
+	GETSETVAR(int,logout_time)
 };
 
 

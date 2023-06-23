@@ -17,6 +17,12 @@ void RelationManager::Restart(){
 	printf("Restart\n");
 }
 
+int RelationManager::UserRelationInit(int user_id){
+	relations_[relation_count_].set_user_id(user_id);
+	set_relation_count(relation_count()+1);
+    return 0;
+}
+
 RelationInfo* RelationManager::GetRelation(int user_id){
 	for(int i=0;i<relation_count_;i++){
 		if(relations_[i].user_id()==user_id){

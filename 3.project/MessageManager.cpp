@@ -21,7 +21,7 @@ MessageInfo* MessageManager::GetMessage(int user_id,int message_id){
 MessageInfo* MessageManager::GetMessage(int message_id){
 	return NULL;
 }
-int MessageManager::PushMessage(MessageInfo message){
+int MessageManager::PublishMessage(MessageInfo message){
 	return SUCCESS;
 }
 int MessageManager::DeleteMessage(int message_id){

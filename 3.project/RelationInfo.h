@@ -13,11 +13,13 @@ public:
 
 private:
     GETSETVAR(int,user_id);
+    GETSETVAR(int,friend_count);
     int friend_list_[10240];
+    GETSETVAR(int,black_count);
     int black_list_[10240];
 public:
-    int *getFriendList();
-    int *getBlackList();
+	int GetFriendUserIdByIndex(int index);
+	int GetBlackUserIdByIndex(int index);
     int CheckFriend(int other_id);
     int CheckBlack(int other_id);
     int AddFriend(int other_id);
