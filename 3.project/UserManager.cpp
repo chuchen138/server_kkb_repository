@@ -26,52 +26,8 @@ int UserManager::GetUserIdByUserName(const char* user_name){
         return USER_NOT_EXIST;
 }
 
-int UserManager::Init(){
-    set_user_count(0);
-    conn = mysql_init(NULL);
-	if(conn == NULL){
-		return DB_CONN_INIT_FAIL;
-	}
-	conn = mysql_real_connect(conn,"127.0.0.1","root","123","sxg",0,NULL,0);
-	if(conn == NULL){
-		return DB_CONN_CONNECT_FAIL;
-	}
-	if(mysql_query(conn,"select * from tb_user;")){
-		printf("query fail : %s \n",mysql_error(conn));
-		return DB_QUERY_FAIL;
-	}else{
-		result = mysql_use_result(conn);
-		if(result){
-			int num_fields_1 = mysql_num_fields(result);
-			int num_fields_2 = mysql_field_count(conn);
-			//printf("num_fields_1 %d, num_fields_2 %d\n",num_fields_1,num_fields_2);
-			for(int i=0;i<num_fields_2;i++){
-				row = mysql_fetch_row(result);
-				if(row == NULL) {
-					break;
-				}
-				for(int j=0;j<num_fields_1;j++){
-					printf("%s\t",row[j]);
-				}
-				// 0 - id
-				// 1 - SerializeString
-
-				//users[i].set_user_id(str2int(row[0]));
-				//users[i].set_user_name();
-				sxg::UserInfoBase pb_user;
-				pb_user.ParseFromArray(row[1],sizeof(row[1]));
-				//pb_user.user_id();
-				users[i].set_user_id(pb_user.user_id());
-				//users[i].set_user_name(pb_user.user_name());
-				//users[i].set_nick_name(pb_user.nick_name());
-				users[i].set_db_flag(FLAG_INIT);
-				printf("\n");
-
-			}
-			set_user_count(num_fields_2);
-		}
-		mysql_free_result(result);
-	}	
+int UserManager::Init(DbManager* db_svr){
+    db_svr_ = db_svr;
 	printf("UserManager Init\n");
 	return SUCCESS;
 }
@@ -82,55 +38,30 @@ int UserManager::Proc(){
 }
 
 int UserManager::Start(){
-    set_cur_user_id(10001);
-	int ret=Init();
-	if(ret!=SUCCESS){
-		printf("UserManager Start Fail %d\n",ret);
+    int used_user_id=db_svr_->GetUserId();
+	set_cur_user_id(used_user_id);
+	int ret=db_svr_->GetUsersBegin();
+	int ui=0;
+	if(ret==SUCCESS){
+		ret=db_svr_->GetUsersOneByOne(&users[ui]);
+		if(ret==SUCCESS)ui++;
+		while(ret!=DB_NO_MORE_DATA){
+			ret=db_svr_->GetUsersOneByOne(&users[ui]);
+			if(ret==SUCCESS)ui++;
+		}
+		ret=db_svr_->GetUsersEnd();
+		set_user_count(ui);
+	}else{
+		printf("[Error   ]UserManager Start fail\n");
 		return ret;
 	}
+	ShowAll();
 	printf("UserManager Start\n");
 	return SUCCESS;
 }
 
 int UserManager::Shutdown(){
-    for(int i=0;i<user_count_;i++){
-		//1 delete
-		if(users[i].db_flag()==FLAG_DELETE){
-			char user_id[256];
-			sprintf(user_id,"%d",users[i].user_id());
-			string deleSql="delete from tb_user where user_id=";
-			deleSql+=user_id;
-			deleSql+=";";
-			//printf("del:%s\n",deleSql.c_str());
-			if(mysql_query(conn,deleSql.c_str())){
-         			printf("delete fail : %s \n",mysql_error(conn));
-                		return DB_QUERY_FAIL;
-        		}
-		}
-		//2 update
-		if(users[i].db_flag()==FLAG_UPDATE||1){
-			sxg::UserInfoBase pb_user;
-			pb_user.set_user_id(users[i].user_id());
-			//pb_user.set_user_name(users[i].user_name());
-			
-			pb_user.set_login_time(users[i].login_time());
-			char data[10240];
-			pb_user.SerializeToArray(data,10240);
-			char user_id[256];
-                        sprintf(user_id,"%d",users[i].user_id());
-			string updateSql="update tb_user set user_info='";
-			updateSql+=data;
-			updateSql+="' where user_id=";
-			updateSql+=user_id;
-			updateSql+=";";
-			printf("upSql:%s\n",updateSql.c_str());
-			//+data+"' where id="+pb_user.user_id()+";";
-			if(mysql_query(conn,updateSql.c_str())){
-                		printf("update fail : %s \n",mysql_error(conn));
-                		return DB_QUERY_FAIL;
-        	}
-		}
-	}
+    SaveUsers();
 	printf("UserManager Shutdown\n");
     return SUCCESS;
 }
@@ -142,7 +73,7 @@ int UserManager::Restart(){
 
 int UserManager::ShowAll(){
 	printf("========================================\n");
-	for(int i=0;i<user_count_;i++){
+	for(int i=0;i<user_count();i++){
 		printf("| %d | %s | %s |\n",users[i].user_id(),users[i].user_name(),users[i].password());
 	}
 	printf("========================================\n");
@@ -191,7 +122,6 @@ int UserManager::DeleteUser(int user_id){
 			return USER_EXIST;
 		}
 	}
-
 	return 0;
 }
 
@@ -229,4 +159,25 @@ int UserManager::CheckExist(int user_id){
                 return USER_NOT_EXIST;
         }
 	return USER_EXIST;
+}
+
+int UserManager::SaveUsers(){
+	for(int i=0;i<user_count_;i++){
+		/* 1 delete */
+		if(users[i].db_flag()==FLAG_DELETE){
+			db_svr_->DeleteUser(&users[i]);
+                        users[i].set_db_flag(FLAG_INIT);
+		}
+		/* 2 update */
+		if(users[i].db_flag()==FLAG_UPDATE){
+			db_svr_->UpdateUser(&users[i]);
+                        users[i].set_db_flag(FLAG_INIT);
+		}
+		/* 3 insert */
+		if(users[i].db_flag()==FLAG_INSERT){
+			db_svr_->InsertUser(&users[i]);
+			users[i].set_db_flag(FLAG_INIT);
+		}
+	}
+	return 0;
 }

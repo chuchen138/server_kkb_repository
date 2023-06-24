@@ -105,19 +105,29 @@ class UserInfoBase : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 user_id() const;
   inline void set_user_id(::google::protobuf::uint32 value);
 
-  // optional uint32 user_name = 3;
+  // optional string user_name = 3;
   inline bool has_user_name() const;
   inline void clear_user_name();
   static const int kUserNameFieldNumber = 3;
-  inline ::google::protobuf::uint32 user_name() const;
-  inline void set_user_name(::google::protobuf::uint32 value);
+  inline const ::std::string& user_name() const;
+  inline void set_user_name(const ::std::string& value);
+  inline void set_user_name(const char* value);
+  inline void set_user_name(const char* value, size_t size);
+  inline ::std::string* mutable_user_name();
+  inline ::std::string* release_user_name();
+  inline void set_allocated_user_name(::std::string* user_name);
 
-  // optional uint32 nick_name = 4;
+  // optional string nick_name = 4;
   inline bool has_nick_name() const;
   inline void clear_nick_name();
   static const int kNickNameFieldNumber = 4;
-  inline ::google::protobuf::uint32 nick_name() const;
-  inline void set_nick_name(::google::protobuf::uint32 value);
+  inline const ::std::string& nick_name() const;
+  inline void set_nick_name(const ::std::string& value);
+  inline void set_nick_name(const char* value);
+  inline void set_nick_name(const char* value, size_t size);
+  inline ::std::string* mutable_nick_name();
+  inline ::std::string* release_nick_name();
+  inline void set_allocated_nick_name(::std::string* nick_name);
 
   // optional uint32 reg_time = 5;
   inline bool has_reg_time() const;
@@ -166,17 +176,12 @@ class UserInfoBase : public ::google::protobuf::Message {
   inline ::std::string* release_password();
   inline void set_allocated_password(::std::string* password);
 
-  // optional string logout_time = 11;
+  // optional uint32 logout_time = 11;
   inline bool has_logout_time() const;
   inline void clear_logout_time();
   static const int kLogoutTimeFieldNumber = 11;
-  inline const ::std::string& logout_time() const;
-  inline void set_logout_time(const ::std::string& value);
-  inline void set_logout_time(const char* value);
-  inline void set_logout_time(const char* value, size_t size);
-  inline ::std::string* mutable_logout_time();
-  inline ::std::string* release_logout_time();
-  inline void set_allocated_logout_time(::std::string* logout_time);
+  inline ::google::protobuf::uint32 logout_time() const;
+  inline void set_logout_time(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:sxg.UserInfoBase)
  private:
@@ -207,15 +212,15 @@ class UserInfoBase : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 ver_;
   ::google::protobuf::uint32 user_id_;
-  ::google::protobuf::uint32 user_name_;
-  ::google::protobuf::uint32 nick_name_;
+  ::std::string* user_name_;
+  ::std::string* nick_name_;
   ::google::protobuf::uint32 reg_time_;
   ::google::protobuf::uint32 from_;
   ::google::protobuf::uint32 login_time_;
   ::google::protobuf::uint32 last_login_time_;
   ::std::string* password_;
-  ::std::string* logout_time_;
   ::google::protobuf::uint32 fresh_time_;
+  ::google::protobuf::uint32 logout_time_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
@@ -278,7 +283,7 @@ inline void UserInfoBase::set_user_id(::google::protobuf::uint32 value) {
   user_id_ = value;
 }
 
-// optional uint32 user_name = 3;
+// optional string user_name = 3;
 inline bool UserInfoBase::has_user_name() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -289,18 +294,66 @@ inline void UserInfoBase::clear_has_user_name() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void UserInfoBase::clear_user_name() {
-  user_name_ = 0u;
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    user_name_->clear();
+  }
   clear_has_user_name();
 }
-inline ::google::protobuf::uint32 UserInfoBase::user_name() const {
+inline const ::std::string& UserInfoBase::user_name() const {
+  return *user_name_;
+}
+inline void UserInfoBase::set_user_name(const ::std::string& value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void UserInfoBase::set_user_name(const char* value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void UserInfoBase::set_user_name(const char* value, size_t size) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserInfoBase::mutable_user_name() {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
   return user_name_;
 }
-inline void UserInfoBase::set_user_name(::google::protobuf::uint32 value) {
-  set_has_user_name();
-  user_name_ = value;
+inline ::std::string* UserInfoBase::release_user_name() {
+  clear_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_name_;
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserInfoBase::set_allocated_user_name(::std::string* user_name) {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete user_name_;
+  }
+  if (user_name) {
+    set_has_user_name();
+    user_name_ = user_name;
+  } else {
+    clear_has_user_name();
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
-// optional uint32 nick_name = 4;
+// optional string nick_name = 4;
 inline bool UserInfoBase::has_nick_name() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -311,15 +364,63 @@ inline void UserInfoBase::clear_has_nick_name() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void UserInfoBase::clear_nick_name() {
-  nick_name_ = 0u;
+  if (nick_name_ != &::google::protobuf::internal::kEmptyString) {
+    nick_name_->clear();
+  }
   clear_has_nick_name();
 }
-inline ::google::protobuf::uint32 UserInfoBase::nick_name() const {
+inline const ::std::string& UserInfoBase::nick_name() const {
+  return *nick_name_;
+}
+inline void UserInfoBase::set_nick_name(const ::std::string& value) {
+  set_has_nick_name();
+  if (nick_name_ == &::google::protobuf::internal::kEmptyString) {
+    nick_name_ = new ::std::string;
+  }
+  nick_name_->assign(value);
+}
+inline void UserInfoBase::set_nick_name(const char* value) {
+  set_has_nick_name();
+  if (nick_name_ == &::google::protobuf::internal::kEmptyString) {
+    nick_name_ = new ::std::string;
+  }
+  nick_name_->assign(value);
+}
+inline void UserInfoBase::set_nick_name(const char* value, size_t size) {
+  set_has_nick_name();
+  if (nick_name_ == &::google::protobuf::internal::kEmptyString) {
+    nick_name_ = new ::std::string;
+  }
+  nick_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* UserInfoBase::mutable_nick_name() {
+  set_has_nick_name();
+  if (nick_name_ == &::google::protobuf::internal::kEmptyString) {
+    nick_name_ = new ::std::string;
+  }
   return nick_name_;
 }
-inline void UserInfoBase::set_nick_name(::google::protobuf::uint32 value) {
-  set_has_nick_name();
-  nick_name_ = value;
+inline ::std::string* UserInfoBase::release_nick_name() {
+  clear_has_nick_name();
+  if (nick_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = nick_name_;
+    nick_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void UserInfoBase::set_allocated_nick_name(::std::string* nick_name) {
+  if (nick_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete nick_name_;
+  }
+  if (nick_name) {
+    set_has_nick_name();
+    nick_name_ = nick_name;
+  } else {
+    clear_has_nick_name();
+    nick_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // optional uint32 reg_time = 5;
@@ -502,7 +603,7 @@ inline void UserInfoBase::set_allocated_password(::std::string* password) {
   }
 }
 
-// optional string logout_time = 11;
+// optional uint32 logout_time = 11;
 inline bool UserInfoBase::has_logout_time() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
@@ -513,63 +614,15 @@ inline void UserInfoBase::clear_has_logout_time() {
   _has_bits_[0] &= ~0x00000400u;
 }
 inline void UserInfoBase::clear_logout_time() {
-  if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
-    logout_time_->clear();
-  }
+  logout_time_ = 0u;
   clear_has_logout_time();
 }
-inline const ::std::string& UserInfoBase::logout_time() const {
-  return *logout_time_;
-}
-inline void UserInfoBase::set_logout_time(const ::std::string& value) {
-  set_has_logout_time();
-  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
-    logout_time_ = new ::std::string;
-  }
-  logout_time_->assign(value);
-}
-inline void UserInfoBase::set_logout_time(const char* value) {
-  set_has_logout_time();
-  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
-    logout_time_ = new ::std::string;
-  }
-  logout_time_->assign(value);
-}
-inline void UserInfoBase::set_logout_time(const char* value, size_t size) {
-  set_has_logout_time();
-  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
-    logout_time_ = new ::std::string;
-  }
-  logout_time_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserInfoBase::mutable_logout_time() {
-  set_has_logout_time();
-  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
-    logout_time_ = new ::std::string;
-  }
+inline ::google::protobuf::uint32 UserInfoBase::logout_time() const {
   return logout_time_;
 }
-inline ::std::string* UserInfoBase::release_logout_time() {
-  clear_has_logout_time();
-  if (logout_time_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = logout_time_;
-    logout_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserInfoBase::set_allocated_logout_time(::std::string* logout_time) {
-  if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
-    delete logout_time_;
-  }
-  if (logout_time) {
-    set_has_logout_time();
-    logout_time_ = logout_time;
-  } else {
-    clear_has_logout_time();
-    logout_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
+inline void UserInfoBase::set_logout_time(::google::protobuf::uint32 value) {
+  set_has_logout_time();
+  logout_time_ = value;
 }
 
 

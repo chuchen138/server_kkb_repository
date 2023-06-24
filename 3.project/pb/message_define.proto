@@ -16,6 +16,7 @@ message RegRsp{
         optional int32 mess_type = 2; // 402
         optional int32 ret = 3;
         optional int32 user_id = 4;
+	optional string user_name = 5;
 };
 
 
@@ -31,6 +32,7 @@ message LoginRsp{
     optional int32 mess_type = 2;// 102
     optional int32 ret = 3;
     optional int32 user_id = 4;
+	optional string user_name = 5;
 };
 
 message LogoutReq{
@@ -145,5 +147,21 @@ message DelBlackRsp{
         optional int32 ret = 3;
 }
 
+/*
+message AdminCmd{
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;
+    optional int32 user_id = 3;
+    optional int32 cmd_id = 4;
+};
 
+message UserRelation{
+    optional int32 ver = 1;
+    optional int32 user_id = 2;
+};
 
+message RelationUser{
+    optional int32 ver = 1;
+    optional RelationInfo rela_info = 2;
+};
+*/

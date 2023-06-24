@@ -31,10 +31,13 @@
 #define DB_CONN_INIT_FAIL -600
 #define DB_CONN_CONNECT_FAIL -601
 #define DB_QUERY_FAIL -602
+#define DB_IS_BUSY -603
+#define DB_NO_MORE_DATA -604
 
 
 #define FLAG_INIT 0
 #define FLAG_DELETE 1
 #define FLAG_UPDATE 2
+#define FLAG_INSERT 3
 
 #endif

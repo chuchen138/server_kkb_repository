@@ -9,14 +9,10 @@ private:
     GETSETVAR(int,user_count)
 	GETSETVAR(int,reg_num)
 	GETSETVAR(int,cur_user_id)
-    int Init();
-
-private:
-    MYSQL *conn;
-    MYSQL_RES *result;
-    MYSQL_ROW row;
+    DbManager* db_svr_;
 
 public:
+    int Init(DbManager *db_svr);
     int Start();
     int Proc();
     int Shutdown();
@@ -27,6 +23,7 @@ public:
     int CheckExist(int user_id);
 	int CreateUser(const char* user_name,const char *pswd, int from, int time_now);
 	int DeleteUser(int user_id);
+    int SaveUsers();
 	int LoginCheck(const char* user_name,const char* user_pswd);
 	int UserLogout(int user_id,int now);
 	int GetUserIdByUserName(const char* user_name);

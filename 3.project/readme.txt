@@ -195,3 +195,20 @@ GetMessType()
 RecvRsp() // 接收回复
 ClientSocketInit() // 建立连接
 
+6月16日
+主要任务：更改大体框架，完成数据库连接。
+删掉管理文件的SQL服务。
+完善mydb.h的数据库接口。
+mydb.h 添加类成员方法
+    int GetUserId(); // 从数据库中得到需要的用户ID。
+	int GetUsersBegin(); // 得到开始的用户
+	int GetUsersOneByOne(UserInfo* user); // 将用户一个个加入用户池；
+	int GetUsersEnd(); // 得到最后的用户
+	int InsertUser(UserInfo* user); // 在数据库插入用户信息
+	int UpdateUser(UserInfo* user); 
+	int DeleteUser(UserInfo* user);
+    
+
+6月20日
+主要任务：共享内存通信
+添加测试文件ShmSetter.cpp

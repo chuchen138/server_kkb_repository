@@ -18,6 +18,8 @@ UserManager user_svr;
 RelationManager rela_svr;
 MessageManager mess_svr;
 PhotoManager photo_svr;
+DbManager db_svr;
+int debug_on = 1;
 
 void Test() {
 	char user_name[]="Hank";
@@ -25,14 +27,6 @@ void Test() {
 	int ret=user_svr.CreateUser(user_name,password,0,0);
 }
 
-int sizeof_b(unsigned char* buffer){
-	for(int i=0;i<10244;i++){
-		if(buffer[i]==0){
-			return i;
-		}
-	}
-	return 10244;
-}
 unsigned char recv_buffer[10244];
 int GetReqMessType(){
 	return ( (recv_buffer[0]-'0')*100+(recv_buffer[1]-'0')*10+recv_buffer[2]-'0' );
@@ -68,8 +62,9 @@ int SocketAccept(){
 	printf("Socket Accepted\n");
 	return 0;
 }
-
+int send_fail_count = 0;
 int ClientClose(){
+    send_fail_count = 1;
 	printf("Client Disconnect and Closed\n");fflush(stdout);
 	close(clnt_sock);
 	accept_flag=0;
@@ -95,8 +90,7 @@ int SocketCheckRecv(){
 	return -1;
 }
 
-int SocketSendRsp(){
-	int send_size=sizeof_b(send_buffer);
+int SocketSendRsp(int send_size){
 	int ret=send(clnt_sock, send_buffer, send_size, 0);
 	/*printf("send_ret:%d %d\n",ret,send_size);*/
 	if(ret<0){
@@ -153,13 +147,15 @@ char mess_type_str[10];
 
 int main() {
 
+    db_svr.Init();
+    user_svr.Init(&db_svr);
 	user_svr.Start();
 	rela_svr.Start();
 	mess_svr.Start();
 	photo_svr.Start();
-	SocketInit();
 
 	Test();
+	SocketInit();
 	SocketAccept();
 	int times=0;
 	int server_on=1;
@@ -174,8 +170,9 @@ int main() {
 		times++;
 		printf("message count: %d\n",times);fflush(stdout);
 		switch(mess_type){
-			case REG_REQ:
+			case REG_REQ: // register request;
 				msgRegReq.ParseFromArray(recv_buffer+3,10240);
+                msgRegRsp.set_user_id(0);
 				ret=user_svr.CreateUser(msgRegReq.user_name().c_str(),
 							msgRegReq.password().c_str(),
 							msgRegReq.from(),now);
@@ -190,10 +187,12 @@ int main() {
 				sprintf(mess_type_str,"%d",REG_RSP);
 				SetRspMessType(mess_type_str);
 				msgRegRsp.SerializeToArray(send_buffer+3,10240);
-				SocketSendRsp();
+				SocketSendRsp(msgRegRsp.ByteSize()+3);
+            printf("..\n");
 				break;
 			case LOGIN_REQ:
 				msgLoginReq.ParseFromArray(recv_buffer+3,10240);
+                printf("login uname : %s\n",msgLoginReq.user_name().c_str());
 				ret=user_svr.LoginCheck(msgLoginReq.user_name().c_str(),
 							msgLoginReq.password().c_str());
 				if(ret==SUCCESS){
@@ -203,11 +202,15 @@ int main() {
 					msgLoginRsp.set_user_id(user_id);
 				}else{
 					msgLoginRsp.set_ret(ret);
+                    msgLoginRsp.set_user_id(0);
 				}
 				msgLoginRsp.set_ret(ret);
 				sprintf(mess_type_str,"%d",mess_type+1);
-                                msgLoginRsp.SerializeToArray(send_buffer+3,10240);
-                                SocketSendRsp();
+                SetRspMessType(mess_type_str);
+                ret = msgLoginRsp.SerializeToArray(send_buffer+3,10240);
+                printf("ret:%d\n",ret);
+                SocketSendRsp(msgLoginRsp.ByteSize()+3);
+            printf("..\n");
 				break;
 			case ADD_FRIEND_REQ:
 				msgAddFriendReq.ParseFromArray(recv_buffer+3,10240);
@@ -226,10 +229,36 @@ int main() {
 				}
 				printf("302 msgAddFriendRsp ret:%d\n",ret);fflush(stdout);
 				sprintf(mess_type_str,"%d",ADD_FRIEND_RSP);
-                                SetRspMessType(mess_type_str);
-                                msgLoginRsp.SerializeToArray(send_buffer+3,10240);
-                                SocketSendRsp();
+                SetRspMessType(mess_type_str);
+                msgLoginRsp.SerializeToArray(send_buffer+3,10240);
+				if(debug_on)printf("[DEBUG   ]ret_byte_size:%d\n",ret);
+                SocketSendRsp(msgAddFriendRsp.ByteSize()+3);
+                printf("..\n");
 				break;
+            case DEL_FRIEND_REQ:
+				msgDelFriendReq.ParseFromArray(recv_buffer+3,10240);
+				if(debug_on)printf("[DEBUG   ]mess_type:303, uid1:%d uid2:%d\n",msgDelFriendReq.user_id(),msgDelFriendReq.other_id());
+				ret = user_svr.CheckExist(msgDelFriendReq.user_id());
+				if(ret==USER_EXIST){
+					ret=user_svr.CheckExist(msgDelFriendReq.other_id());
+					if(ret==USER_EXIST){
+						ret=rela_svr.DeleteFriend(	msgDelFriendReq.user_id(),
+									msgDelFriendReq.other_id());
+						msgDelFriendRsp.set_ret(ret);
+					}else{
+						msgDelFriendRsp.set_ret(ret);
+					}
+				}else{
+					msgDelFriendRsp.set_ret(ret);
+				}
+				if(debug_on)printf("[DEBUG   ]304 DelFriendRsp ret:%d\n",ret);fflush(stdout);
+				sprintf(mess_type_str,"%d",DEL_FRIEND_RSP);
+				SetRspMessType(mess_type_str);
+				ret=msgDelFriendRsp.SerializeToArray(send_buffer+3,10240);
+				if(debug_on)printf("[DEBUG   ]ret_byte_size:%d\n",ret);
+				SocketSendRsp(msgDelFriendRsp.ByteSize()+3);
+                printf("..\n");
+                break;
 				case ADD_BLACK_REQ:
 					msgAddBlackReq.ParseFromArray(recv_buffer+3,10240);
 					ret = user_svr.CheckExist(msgAddBlackReq.user_id());
@@ -245,10 +274,11 @@ int main() {
 						msgAddBlackRsp.set_ret(ret);
 					}
 					msgAddBlackRsp.set_ret(ret);
-                                	sprintf(mess_type_str,"%d",mess_type+1);
-                                	SetRspMessType(mess_type_str);
+                    sprintf(mess_type_str,"%d",mess_type+1);
+                    SetRspMessType(mess_type_str);
 					msgAddBlackRsp.SerializeToArray(send_buffer+3,10240);
-                                	SocketSendRsp();
+                    SocketSendRsp(msgAddBlackRsp.ByteSize());
+                printf("..\n");
 				break;
 				case PUBLISH_MESSAGE_REQ:
 				msgPublishMessageReq.ParseFromArray(recv_buffer+3,10240);
@@ -263,10 +293,11 @@ int main() {
 				}else{
 					msgPublishMessageRsp.set_ret(ret);
 				}
-                                sprintf(mess_type_str,"%d",mess_type+1);
-                                SetRspMessType(mess_type_str);
+                sprintf(mess_type_str,"%d",mess_type+1);
+                SetRspMessType(mess_type_str);
 				msgPublishMessageRsp.SerializeToArray(send_buffer+3,10240);
-                                SocketSendRsp();
+                SocketSendRsp(msgPublishMessageRsp.ByteSize());
+                printf("..\n");
 				break;
 			default:
 				printf("unknown mess_type: %d\n",mess_type);

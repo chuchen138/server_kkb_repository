@@ -80,6 +80,10 @@ int RelationInfo::DeleteFriend(int other_id) {
     for(int i=0;i<friend_count_;i++){
         if(friend_list_[i]==other_id){
             friend_list_[i]=-1;
+            for(int j=i;j<friend_count_;j++){
+				friend_list_[i]=friend_list_[i+1];
+			}
+			friend_count_--;
         }
     }
     return SUCCESS;

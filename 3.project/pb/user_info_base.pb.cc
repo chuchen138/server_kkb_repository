@@ -90,11 +90,11 @@ void protobuf_AddDesc_user_5finfo_5fbase_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\024user_info_base.proto\022\003sxg\"\332\001\n\014UserInfo"
     "Base\022\013\n\003ver\030\001 \001(\r\022\017\n\007user_id\030\002 \001(\r\022\021\n\tus"
-    "er_name\030\003 \001(\r\022\021\n\tnick_name\030\004 \001(\r\022\020\n\010reg_"
+    "er_name\030\003 \001(\t\022\021\n\tnick_name\030\004 \001(\t\022\020\n\010reg_"
     "time\030\005 \001(\r\022\014\n\004from\030\006 \001(\r\022\022\n\nlogin_time\030\007"
     " \001(\r\022\027\n\017last_login_time\030\010 \001(\r\022\022\n\nfresh_t"
     "ime\030\t \001(\r\022\020\n\010password\030\n \001(\t\022\023\n\013logout_ti"
-    "me\030\013 \001(\t", 248);
+    "me\030\013 \001(\r", 248);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user_info_base.proto", &protobuf_RegisterTypes);
   UserInfoBase::default_instance_ = new UserInfoBase();
@@ -143,15 +143,15 @@ void UserInfoBase::SharedCtor() {
   _cached_size_ = 0;
   ver_ = 0u;
   user_id_ = 0u;
-  user_name_ = 0u;
-  nick_name_ = 0u;
+  user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  nick_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   reg_time_ = 0u;
   from_ = 0u;
   login_time_ = 0u;
   last_login_time_ = 0u;
   fresh_time_ = 0u;
   password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  logout_time_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  logout_time_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -160,11 +160,14 @@ UserInfoBase::~UserInfoBase() {
 }
 
 void UserInfoBase::SharedDtor() {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete user_name_;
+  }
+  if (nick_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete nick_name_;
+  }
   if (password_ != &::google::protobuf::internal::kEmptyString) {
     delete password_;
-  }
-  if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
-    delete logout_time_;
   }
   if (this != default_instance_) {
   }
@@ -195,8 +198,16 @@ void UserInfoBase::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     ver_ = 0u;
     user_id_ = 0u;
-    user_name_ = 0u;
-    nick_name_ = 0u;
+    if (has_user_name()) {
+      if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+        user_name_->clear();
+      }
+    }
+    if (has_nick_name()) {
+      if (nick_name_ != &::google::protobuf::internal::kEmptyString) {
+        nick_name_->clear();
+      }
+    }
     reg_time_ = 0u;
     from_ = 0u;
     login_time_ = 0u;
@@ -209,11 +220,7 @@ void UserInfoBase::Clear() {
         password_->clear();
       }
     }
-    if (has_logout_time()) {
-      if (logout_time_ != &::google::protobuf::internal::kEmptyString) {
-        logout_time_->clear();
-      }
-    }
+    logout_time_ = 0u;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -252,35 +259,37 @@ bool UserInfoBase::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_user_name;
+        if (input->ExpectTag(26)) goto parse_user_name;
         break;
       }
 
-      // optional uint32 user_name = 3;
+      // optional string user_name = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_user_name:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &user_name_)));
-          set_has_user_name();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_user_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->user_name().data(), this->user_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_nick_name;
+        if (input->ExpectTag(34)) goto parse_nick_name;
         break;
       }
 
-      // optional uint32 nick_name = 4;
+      // optional string nick_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
          parse_nick_name:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &nick_name_)));
-          set_has_nick_name();
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_nick_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->nick_name().data(), this->nick_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -381,20 +390,19 @@ bool UserInfoBase::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(90)) goto parse_logout_time;
+        if (input->ExpectTag(88)) goto parse_logout_time;
         break;
       }
 
-      // optional string logout_time = 11;
+      // optional uint32 logout_time = 11;
       case 11: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
          parse_logout_time:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_logout_time()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-            this->logout_time().data(), this->logout_time().length(),
-            ::google::protobuf::internal::WireFormat::PARSE);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &logout_time_)));
+          set_has_logout_time();
         } else {
           goto handle_uninterpreted;
         }
@@ -430,14 +438,22 @@ void UserInfoBase::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->user_id(), output);
   }
 
-  // optional uint32 user_name = 3;
+  // optional string user_name = 3;
   if (has_user_name()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->user_name(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->user_name().data(), this->user_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->user_name(), output);
   }
 
-  // optional uint32 nick_name = 4;
+  // optional string nick_name = 4;
   if (has_nick_name()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->nick_name(), output);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->nick_name().data(), this->nick_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->nick_name(), output);
   }
 
   // optional uint32 reg_time = 5;
@@ -474,13 +490,9 @@ void UserInfoBase::SerializeWithCachedSizes(
       10, this->password(), output);
   }
 
-  // optional string logout_time = 11;
+  // optional uint32 logout_time = 11;
   if (has_logout_time()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->logout_time().data(), this->logout_time().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    ::google::protobuf::internal::WireFormatLite::WriteString(
-      11, this->logout_time(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(11, this->logout_time(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -501,14 +513,24 @@ void UserInfoBase::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->user_id(), target);
   }
 
-  // optional uint32 user_name = 3;
+  // optional string user_name = 3;
   if (has_user_name()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->user_name(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->user_name().data(), this->user_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->user_name(), target);
   }
 
-  // optional uint32 nick_name = 4;
+  // optional string nick_name = 4;
   if (has_nick_name()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->nick_name(), target);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->nick_name().data(), this->nick_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->nick_name(), target);
   }
 
   // optional uint32 reg_time = 5;
@@ -546,14 +568,9 @@ void UserInfoBase::SerializeWithCachedSizes(
         10, this->password(), target);
   }
 
-  // optional string logout_time = 11;
+  // optional uint32 logout_time = 11;
   if (has_logout_time()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
-      this->logout_time().data(), this->logout_time().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE);
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        11, this->logout_time(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(11, this->logout_time(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -581,17 +598,17 @@ int UserInfoBase::ByteSize() const {
           this->user_id());
     }
 
-    // optional uint32 user_name = 3;
+    // optional string user_name = 3;
     if (has_user_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->user_name());
     }
 
-    // optional uint32 nick_name = 4;
+    // optional string nick_name = 4;
     if (has_nick_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+        ::google::protobuf::internal::WireFormatLite::StringSize(
           this->nick_name());
     }
 
@@ -639,10 +656,10 @@ int UserInfoBase::ByteSize() const {
           this->password());
     }
 
-    // optional string logout_time = 11;
+    // optional uint32 logout_time = 11;
     if (has_logout_time()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
           this->logout_time());
     }
 
