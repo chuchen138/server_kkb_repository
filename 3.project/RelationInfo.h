@@ -14,9 +14,10 @@ public:
 private:
     GETSETVAR(int,user_id);
     GETSETVAR(int,friend_count);
-    int friend_list_[10240];
+    int friend_list_[1024];
     GETSETVAR(int,black_count);
-    int black_list_[10240];
+    int black_list_[1024];
+	GETSETVAR(int,db_flag)
 public:
 	int GetFriendUserIdByIndex(int index);
 	int GetBlackUserIdByIndex(int index);

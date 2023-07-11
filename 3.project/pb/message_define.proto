@@ -32,7 +32,7 @@ message LoginRsp{
     optional int32 mess_type = 2;// 102
     optional int32 ret = 3;
     optional int32 user_id = 4;
-	optional string user_name = 5;
+    optional string user_name = 5;
 };
 
 message LogoutReq{
@@ -52,7 +52,8 @@ message PublishMessageReq{
 	optional int32 ver = 1;
 	optional int32 mess_type = 2; //201
 	optional int32 user_id = 3;
-	optional string content = 4;	
+	optional string sublisher = 4;
+	optional string content = 5;	
 }
 
 message PublishMessageRsp{
@@ -67,19 +68,13 @@ message GetMessageReq{
 	optional int32 user_id = 3;
 }
 
-message MessageBase{
-	optional int32 ver = 1;
-	optional int32 message_id = 2;
-	optional int32 publisher = 3;
-	optional string content = 4;
-	optional int32 publish_time = 5;
-}
+import "message_info_base.proto";
 
 message GetMessageRsp{
         optional int32 ver = 1;
         optional int32 mess_type = 2; // 204
 	optional int32 ret = 3;
-	repeated MessageBase message_list = 4;
+	repeated MessageInfoBase message_list = 4;
 }
 
 message GetPhotoReq{
@@ -92,7 +87,9 @@ message GetPhotoRsp{
 	optional int32 ver = 1;
 	optional int32 mess_type = 2; // 206
 	optional int32 ret = 3;
-	optional MessageBase last_message = 4;
+        optional int32 message_id=4;
+        optional int32 publish_time=5;
+	optional string publisher=6;
 }
 
 message AddFriendReq{
@@ -147,7 +144,6 @@ message DelBlackRsp{
         optional int32 ret = 3;
 }
 
-/*
 message AdminCmd{
     optional int32 ver = 1;
     optional int32 mess_type = 2;
@@ -159,9 +155,28 @@ message UserRelation{
     optional int32 ver = 1;
     optional int32 user_id = 2;
 };
-
+import "relation_info_base.proto";
 message RelationUser{
     optional int32 ver = 1;
-    optional RelationInfo rela_info = 2;
+    optional RelationInfoBase rela_info = 2;
 };
-*/
+
+message AddFriend{
+        optional int32 ver = 1;
+        optional int32 user_id = 2;
+        optional int32 other_id = 3;
+};
+message RelationCommonRsp{
+        optional int32 ver = 1;
+        optional int32 ret = 2;
+};
+
+message SignOutReq{
+        optional int32 ver = 1;
+        optional int32 user_id = 2;
+}
+
+message SignOutRsp{
+        optional int32 ver = 1;
+        optional int32 ret = 2;
+}

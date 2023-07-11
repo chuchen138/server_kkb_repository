@@ -1,5 +1,4 @@
 #ifndef __RET_VALUE_H__
-
 #define __RET_VALUE_H__
 
 #define OK 0
@@ -11,6 +10,8 @@
 #define USER_NOT_EXIST -101
 #define USER_NEED_DELETE -102
 #define WRONG_PASSWORD -103
+#define USER_IS_ONLINE -104
+#define USER_NOT_ONLINE -105
 
 #define NOT_FRIEND -200
 #define ALREADY_FRIEND -201

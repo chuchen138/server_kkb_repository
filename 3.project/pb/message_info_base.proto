@@ -1,8 +1,10 @@
 package sxg;
 message MessageInfoBase{
     optional int32 ver=1;
-    optional int32 user_id=2;
+    optional string publisher=2;
+    optional int32 sublisher=5;
     optional int32 message_id=3;
     optional int32 publish_time=4;
-    optional string content=5;
+    optional string content=6;
 }
+

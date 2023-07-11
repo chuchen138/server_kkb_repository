@@ -1,24 +1,65 @@
-#include<iostream>
-using namespace std;
-#include <sys/ipc.h>
-#include <sys/shm.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include<cstring>
+#include "BusManager.h"
 
-int main(){
+int BusManager::AddBusMessage(MessageInfo messinfo)
+{
+	sxg::MessageInfoBase messinfobase;
+	messinfobase.set_content(messinfo.content());
+	messinfobase.set_publisher(messinfo.publisher());
+	messinfobase.set_sublisher(messinfo.sublisher());
+	messinfobase.set_message_id(messinfo.message_id());
+	messinfobase.set_publish_time(messinfo.publish_time());
+	messinfobuf sendBuf;
+	messinfobase.SerializeToArray(sendBuf.mtext,TEXT_LEN);
+    int msgId = msgget(messinfo.sublisher(), IPC_CREAT|0777);
+ 
+	if(msgId == -1 ){
+		printf("get que failuer\n");
+		return -1;
+	}
+	
+	// msgsnd(msgId,&sendBuf,TEXT_LEN,0);//写入
+	msgsnd(msgId,&sendBuf,sizeof(sendBuf.mtext),0);//写入
+	// for(int i = 0; i < TEXT_LEN; i++){
+	// 	printf("%c",sendBuf.mtext[i]);
+	// }
+// sxg::MessageInfoBase messtest1;
+// messtest1.ParseFromArray(sendBuf.mtext,TEXT_LEN);
+// printf("AddBusMessage send message:[%s] over\n",messtest1.content().c_str());
+// memset(&sendBuf,0,sizeof(struct messinfobuf));
+// msgrcv(msgId,&sendBuf,TEXT_LEN,TEXT_LEN,IPC_NOWAIT);
+// sxg::MessageInfoBase messtest;
+// messtest.ParseFromArray(sendBuf.mtext,TEXT_LEN);
+// printf("AddBusMessage recv message:[%s] over\n",messtest.content().c_str());
+	
+	return 0;
+}
 
-    int shmid = shmget((key_t)9999,10240*12,IPC_CREAT|0640);
-    if(shmid < 0){
-        return -1;
+int BusManager::GetBusMessage(int user_id, sxg::GetMessageRsp *messinfo){
+	int msgId = msgget(user_id, IPC_CREAT|0777);
+	
+	if(msgId == -1 ){
+        printf("get que failuer\n");
     }
+    messinfobuf readBuf;
+	memset(&readBuf,0,sizeof(struct messinfobuf));
+	int ret = 1, count = 0;
+	while(ret){
+		ret = msgrcv(msgId, &readBuf,sizeof(readBuf.mtext),TEXT_LEN,IPC_NOWAIT);//接收
+		if(ret <= 0) break;
+		sxg::MessageInfoBase *messtmp = messinfo->add_message_list();
+		messtmp->ParseFromArray(readBuf.mtext,TEXT_LEN);
+		printf("GetBusMessage receive message:[%s] over\n",messtmp->content().c_str());
+		count++;
+	}
+	return count;
+}
 
-    char *shmp = (char *)shmat(shmid, NULL, 0);
-    if(shmp < 0) return -1;
-    memset(shmp,0,10240*12);
-    int m;
-    scanf("%d",&m);
-
-    shmdt(shmp);
-    return 0;
+int BusManager::DeleteBusMessage(int user_id){
+	int msgId = msgget(user_id, IPC_CREAT|0777);
+	if(msgId == -1 ){
+		printf("get que failuer\n");
+		return -1;
+	}
+	msgctl(msgId,IPC_RMID,NULL);
+	return 0;
 }

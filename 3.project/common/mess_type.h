@@ -1,5 +1,4 @@
 #ifndef _MESS_TYPE_H_
-
 #define _MESS_TYPE_H_
 
 #define LOGIN_REQ 101
@@ -31,6 +30,30 @@
 
 #define REG_REQ 401
 #define REG_RSP 402
+
+#define SIGN_OUT_REQ 501
+#define SIGN_OUT_RSP 502
+
+#define ADMIN 901
+// bus opretor
+#define USER_RELA_BUS_TYPE 6
+#define RELATION_INIT 601
+#define GET_RELATION 602
+#define ADD_FRIEND 603
+#define DEL_FRIEND 604
+#define ADD_BLACK 605
+#define DEL_BLACK 606
+
+// message
+#define USER_MESS_BUS_TYPE 7
+#define PUBLISH_MESSAGE 701
+#define GET_MESSAGE 702
+
+// photo
+#define USER_PHOTO_BUS_TYPE 8
+#define GET_PHOTO 801
+#define SET_PHOTO 802
+
 
 #endif
 

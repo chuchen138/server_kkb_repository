@@ -3,13 +3,13 @@
 
 #include <string.h>
 #include "./common/my_micro.h"
-#include "./pb/user_info_base.pb.h"
+// #include "./pb/user_info_base.pb.h"
 
-using namespace sxg;
+// using namespace sxg;
 struct UserInfo{
 public:
-    void FromPb(sxg::UserInfoBase& user);
-    void ToPb(sxg::UserInfoBase& user);
+    // void FromPb(sxg::UserInfoBase& user);
+    // void ToPb(sxg::UserInfoBase& user);
     GETSETVAR(int,user_id)
     GETSETSTR(256,user_name)
     GETSETSTR(256,nick_name)
@@ -21,6 +21,7 @@ public:
     GETSETSTR(256,password)
 	GETSETVAR(int,db_flag)
 	GETSETVAR(int,logout_time)
+	GETSETVAR(int,is_online)
 };
 
 

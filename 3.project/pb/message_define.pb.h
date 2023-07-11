@@ -24,6 +24,8 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "message_info_base.pb.h"
+#include "relation_info_base.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace sxg {
@@ -42,7 +44,6 @@ class LogoutRsp;
 class PublishMessageReq;
 class PublishMessageRsp;
 class GetMessageReq;
-class MessageBase;
 class GetMessageRsp;
 class GetPhotoReq;
 class GetPhotoRsp;
@@ -54,6 +55,13 @@ class AddBlackReq;
 class AddBlackRsp;
 class DelBlackReq;
 class DelBlackRsp;
+class AdminCmd;
+class UserRelation;
+class RelationUser;
+class AddFriend;
+class RelationCommonRsp;
+class SignOutReq;
+class SignOutRsp;
 
 // ===================================================================
 
@@ -301,6 +309,18 @@ class RegRsp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
+  // optional string user_name = 5;
+  inline bool has_user_name() const;
+  inline void clear_user_name();
+  static const int kUserNameFieldNumber = 5;
+  inline const ::std::string& user_name() const;
+  inline void set_user_name(const ::std::string& value);
+  inline void set_user_name(const char* value);
+  inline void set_user_name(const char* value, size_t size);
+  inline ::std::string* mutable_user_name();
+  inline ::std::string* release_user_name();
+  inline void set_allocated_user_name(::std::string* user_name);
+
   // @@protoc_insertion_point(class_scope:sxg.RegRsp)
  private:
   inline void set_has_ver();
@@ -311,6 +331,8 @@ class RegRsp : public ::google::protobuf::Message {
   inline void clear_has_ret();
   inline void set_has_user_id();
   inline void clear_has_user_id();
+  inline void set_has_user_name();
+  inline void clear_has_user_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -318,9 +340,10 @@ class RegRsp : public ::google::protobuf::Message {
   ::google::protobuf::int32 mess_type_;
   ::google::protobuf::int32 ret_;
   ::google::protobuf::int32 user_id_;
+  ::std::string* user_name_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_message_5fdefine_2eproto();
   friend void protobuf_AssignDesc_message_5fdefine_2eproto();
@@ -535,6 +558,18 @@ class LoginRsp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
+  // optional string user_name = 5;
+  inline bool has_user_name() const;
+  inline void clear_user_name();
+  static const int kUserNameFieldNumber = 5;
+  inline const ::std::string& user_name() const;
+  inline void set_user_name(const ::std::string& value);
+  inline void set_user_name(const char* value);
+  inline void set_user_name(const char* value, size_t size);
+  inline ::std::string* mutable_user_name();
+  inline ::std::string* release_user_name();
+  inline void set_allocated_user_name(::std::string* user_name);
+
   // @@protoc_insertion_point(class_scope:sxg.LoginRsp)
  private:
   inline void set_has_ver();
@@ -545,6 +580,8 @@ class LoginRsp : public ::google::protobuf::Message {
   inline void clear_has_ret();
   inline void set_has_user_id();
   inline void clear_has_user_id();
+  inline void set_has_user_name();
+  inline void clear_has_user_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -552,9 +589,10 @@ class LoginRsp : public ::google::protobuf::Message {
   ::google::protobuf::int32 mess_type_;
   ::google::protobuf::int32 ret_;
   ::google::protobuf::int32 user_id_;
+  ::std::string* user_name_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_message_5fdefine_2eproto();
   friend void protobuf_AssignDesc_message_5fdefine_2eproto();
@@ -844,10 +882,22 @@ class PublishMessageReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
-  // optional string content = 4;
+  // optional string sublisher = 4;
+  inline bool has_sublisher() const;
+  inline void clear_sublisher();
+  static const int kSublisherFieldNumber = 4;
+  inline const ::std::string& sublisher() const;
+  inline void set_sublisher(const ::std::string& value);
+  inline void set_sublisher(const char* value);
+  inline void set_sublisher(const char* value, size_t size);
+  inline ::std::string* mutable_sublisher();
+  inline ::std::string* release_sublisher();
+  inline void set_allocated_sublisher(::std::string* sublisher);
+
+  // optional string content = 5;
   inline bool has_content() const;
   inline void clear_content();
-  static const int kContentFieldNumber = 4;
+  static const int kContentFieldNumber = 5;
   inline const ::std::string& content() const;
   inline void set_content(const ::std::string& value);
   inline void set_content(const char* value);
@@ -864,6 +914,8 @@ class PublishMessageReq : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
+  inline void set_has_sublisher();
+  inline void clear_has_sublisher();
   inline void set_has_content();
   inline void clear_has_content();
 
@@ -871,11 +923,12 @@ class PublishMessageReq : public ::google::protobuf::Message {
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
+  ::std::string* sublisher_;
   ::std::string* content_;
   ::google::protobuf::int32 user_id_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
 
   friend void  protobuf_AddDesc_message_5fdefine_2eproto();
   friend void protobuf_AssignDesc_message_5fdefine_2eproto();
@@ -1090,133 +1143,6 @@ class GetMessageReq : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class MessageBase : public ::google::protobuf::Message {
- public:
-  MessageBase();
-  virtual ~MessageBase();
-
-  MessageBase(const MessageBase& from);
-
-  inline MessageBase& operator=(const MessageBase& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const MessageBase& default_instance();
-
-  void Swap(MessageBase* other);
-
-  // implements Message ----------------------------------------------
-
-  MessageBase* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MessageBase& from);
-  void MergeFrom(const MessageBase& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional int32 ver = 1;
-  inline bool has_ver() const;
-  inline void clear_ver();
-  static const int kVerFieldNumber = 1;
-  inline ::google::protobuf::int32 ver() const;
-  inline void set_ver(::google::protobuf::int32 value);
-
-  // optional int32 message_id = 2;
-  inline bool has_message_id() const;
-  inline void clear_message_id();
-  static const int kMessageIdFieldNumber = 2;
-  inline ::google::protobuf::int32 message_id() const;
-  inline void set_message_id(::google::protobuf::int32 value);
-
-  // optional int32 publisher = 3;
-  inline bool has_publisher() const;
-  inline void clear_publisher();
-  static const int kPublisherFieldNumber = 3;
-  inline ::google::protobuf::int32 publisher() const;
-  inline void set_publisher(::google::protobuf::int32 value);
-
-  // optional string content = 4;
-  inline bool has_content() const;
-  inline void clear_content();
-  static const int kContentFieldNumber = 4;
-  inline const ::std::string& content() const;
-  inline void set_content(const ::std::string& value);
-  inline void set_content(const char* value);
-  inline void set_content(const char* value, size_t size);
-  inline ::std::string* mutable_content();
-  inline ::std::string* release_content();
-  inline void set_allocated_content(::std::string* content);
-
-  // optional int32 publish_time = 5;
-  inline bool has_publish_time() const;
-  inline void clear_publish_time();
-  static const int kPublishTimeFieldNumber = 5;
-  inline ::google::protobuf::int32 publish_time() const;
-  inline void set_publish_time(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:sxg.MessageBase)
- private:
-  inline void set_has_ver();
-  inline void clear_has_ver();
-  inline void set_has_message_id();
-  inline void clear_has_message_id();
-  inline void set_has_publisher();
-  inline void clear_has_publisher();
-  inline void set_has_content();
-  inline void clear_has_content();
-  inline void set_has_publish_time();
-  inline void clear_has_publish_time();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int32 ver_;
-  ::google::protobuf::int32 message_id_;
-  ::std::string* content_;
-  ::google::protobuf::int32 publisher_;
-  ::google::protobuf::int32 publish_time_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
-
-  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
-  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
-  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
-
-  void InitAsDefaultInstance();
-  static MessageBase* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class GetMessageRsp : public ::google::protobuf::Message {
  public:
   GetMessageRsp();
@@ -1292,16 +1218,16 @@ class GetMessageRsp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 ret() const;
   inline void set_ret(::google::protobuf::int32 value);
 
-  // repeated .sxg.MessageBase message_list = 4;
+  // repeated .sxg.MessageInfoBase message_list = 4;
   inline int message_list_size() const;
   inline void clear_message_list();
   static const int kMessageListFieldNumber = 4;
-  inline const ::sxg::MessageBase& message_list(int index) const;
-  inline ::sxg::MessageBase* mutable_message_list(int index);
-  inline ::sxg::MessageBase* add_message_list();
-  inline const ::google::protobuf::RepeatedPtrField< ::sxg::MessageBase >&
+  inline const ::sxg::MessageInfoBase& message_list(int index) const;
+  inline ::sxg::MessageInfoBase* mutable_message_list(int index);
+  inline ::sxg::MessageInfoBase* add_message_list();
+  inline const ::google::protobuf::RepeatedPtrField< ::sxg::MessageInfoBase >&
       message_list() const;
-  inline ::google::protobuf::RepeatedPtrField< ::sxg::MessageBase >*
+  inline ::google::protobuf::RepeatedPtrField< ::sxg::MessageInfoBase >*
       mutable_message_list();
 
   // @@protoc_insertion_point(class_scope:sxg.GetMessageRsp)
@@ -1317,7 +1243,7 @@ class GetMessageRsp : public ::google::protobuf::Message {
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
-  ::google::protobuf::RepeatedPtrField< ::sxg::MessageBase > message_list_;
+  ::google::protobuf::RepeatedPtrField< ::sxg::MessageInfoBase > message_list_;
   ::google::protobuf::int32 ret_;
 
   mutable int _cached_size_;
@@ -1509,14 +1435,31 @@ class GetPhotoRsp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 ret() const;
   inline void set_ret(::google::protobuf::int32 value);
 
-  // optional .sxg.MessageBase last_message = 4;
-  inline bool has_last_message() const;
-  inline void clear_last_message();
-  static const int kLastMessageFieldNumber = 4;
-  inline const ::sxg::MessageBase& last_message() const;
-  inline ::sxg::MessageBase* mutable_last_message();
-  inline ::sxg::MessageBase* release_last_message();
-  inline void set_allocated_last_message(::sxg::MessageBase* last_message);
+  // optional int32 message_id = 4;
+  inline bool has_message_id() const;
+  inline void clear_message_id();
+  static const int kMessageIdFieldNumber = 4;
+  inline ::google::protobuf::int32 message_id() const;
+  inline void set_message_id(::google::protobuf::int32 value);
+
+  // optional int32 publish_time = 5;
+  inline bool has_publish_time() const;
+  inline void clear_publish_time();
+  static const int kPublishTimeFieldNumber = 5;
+  inline ::google::protobuf::int32 publish_time() const;
+  inline void set_publish_time(::google::protobuf::int32 value);
+
+  // optional string publisher = 6;
+  inline bool has_publisher() const;
+  inline void clear_publisher();
+  static const int kPublisherFieldNumber = 6;
+  inline const ::std::string& publisher() const;
+  inline void set_publisher(const ::std::string& value);
+  inline void set_publisher(const char* value);
+  inline void set_publisher(const char* value, size_t size);
+  inline ::std::string* mutable_publisher();
+  inline ::std::string* release_publisher();
+  inline void set_allocated_publisher(::std::string* publisher);
 
   // @@protoc_insertion_point(class_scope:sxg.GetPhotoRsp)
  private:
@@ -1526,18 +1469,24 @@ class GetPhotoRsp : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_ret();
   inline void clear_has_ret();
-  inline void set_has_last_message();
-  inline void clear_has_last_message();
+  inline void set_has_message_id();
+  inline void clear_has_message_id();
+  inline void set_has_publish_time();
+  inline void clear_has_publish_time();
+  inline void set_has_publisher();
+  inline void clear_has_publisher();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
-  ::sxg::MessageBase* last_message_;
   ::google::protobuf::int32 ret_;
+  ::google::protobuf::int32 message_id_;
+  ::std::string* publisher_;
+  ::google::protobuf::int32 publish_time_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
 
   friend void  protobuf_AddDesc_message_5fdefine_2eproto();
   friend void protobuf_AssignDesc_message_5fdefine_2eproto();
@@ -2402,6 +2351,682 @@ class DelBlackRsp : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static DelBlackRsp* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class AdminCmd : public ::google::protobuf::Message {
+ public:
+  AdminCmd();
+  virtual ~AdminCmd();
+
+  AdminCmd(const AdminCmd& from);
+
+  inline AdminCmd& operator=(const AdminCmd& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AdminCmd& default_instance();
+
+  void Swap(AdminCmd* other);
+
+  // implements Message ----------------------------------------------
+
+  AdminCmd* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AdminCmd& from);
+  void MergeFrom(const AdminCmd& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 mess_type = 2;
+  inline bool has_mess_type() const;
+  inline void clear_mess_type();
+  static const int kMessTypeFieldNumber = 2;
+  inline ::google::protobuf::int32 mess_type() const;
+  inline void set_mess_type(::google::protobuf::int32 value);
+
+  // optional int32 user_id = 3;
+  inline bool has_user_id() const;
+  inline void clear_user_id();
+  static const int kUserIdFieldNumber = 3;
+  inline ::google::protobuf::int32 user_id() const;
+  inline void set_user_id(::google::protobuf::int32 value);
+
+  // optional int32 cmd_id = 4;
+  inline bool has_cmd_id() const;
+  inline void clear_cmd_id();
+  static const int kCmdIdFieldNumber = 4;
+  inline ::google::protobuf::int32 cmd_id() const;
+  inline void set_cmd_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.AdminCmd)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_mess_type();
+  inline void clear_has_mess_type();
+  inline void set_has_user_id();
+  inline void clear_has_user_id();
+  inline void set_has_cmd_id();
+  inline void clear_has_cmd_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 mess_type_;
+  ::google::protobuf::int32 user_id_;
+  ::google::protobuf::int32 cmd_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AdminCmd* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class UserRelation : public ::google::protobuf::Message {
+ public:
+  UserRelation();
+  virtual ~UserRelation();
+
+  UserRelation(const UserRelation& from);
+
+  inline UserRelation& operator=(const UserRelation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UserRelation& default_instance();
+
+  void Swap(UserRelation* other);
+
+  // implements Message ----------------------------------------------
+
+  UserRelation* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const UserRelation& from);
+  void MergeFrom(const UserRelation& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 user_id = 2;
+  inline bool has_user_id() const;
+  inline void clear_user_id();
+  static const int kUserIdFieldNumber = 2;
+  inline ::google::protobuf::int32 user_id() const;
+  inline void set_user_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.UserRelation)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_user_id();
+  inline void clear_has_user_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 user_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static UserRelation* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RelationUser : public ::google::protobuf::Message {
+ public:
+  RelationUser();
+  virtual ~RelationUser();
+
+  RelationUser(const RelationUser& from);
+
+  inline RelationUser& operator=(const RelationUser& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RelationUser& default_instance();
+
+  void Swap(RelationUser* other);
+
+  // implements Message ----------------------------------------------
+
+  RelationUser* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RelationUser& from);
+  void MergeFrom(const RelationUser& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional .sxg.RelationInfoBase rela_info = 2;
+  inline bool has_rela_info() const;
+  inline void clear_rela_info();
+  static const int kRelaInfoFieldNumber = 2;
+  inline const ::sxg::RelationInfoBase& rela_info() const;
+  inline ::sxg::RelationInfoBase* mutable_rela_info();
+  inline ::sxg::RelationInfoBase* release_rela_info();
+  inline void set_allocated_rela_info(::sxg::RelationInfoBase* rela_info);
+
+  // @@protoc_insertion_point(class_scope:sxg.RelationUser)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_rela_info();
+  inline void clear_has_rela_info();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::sxg::RelationInfoBase* rela_info_;
+  ::google::protobuf::int32 ver_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static RelationUser* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AddFriend : public ::google::protobuf::Message {
+ public:
+  AddFriend();
+  virtual ~AddFriend();
+
+  AddFriend(const AddFriend& from);
+
+  inline AddFriend& operator=(const AddFriend& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const AddFriend& default_instance();
+
+  void Swap(AddFriend* other);
+
+  // implements Message ----------------------------------------------
+
+  AddFriend* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const AddFriend& from);
+  void MergeFrom(const AddFriend& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 user_id = 2;
+  inline bool has_user_id() const;
+  inline void clear_user_id();
+  static const int kUserIdFieldNumber = 2;
+  inline ::google::protobuf::int32 user_id() const;
+  inline void set_user_id(::google::protobuf::int32 value);
+
+  // optional int32 other_id = 3;
+  inline bool has_other_id() const;
+  inline void clear_other_id();
+  static const int kOtherIdFieldNumber = 3;
+  inline ::google::protobuf::int32 other_id() const;
+  inline void set_other_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.AddFriend)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_user_id();
+  inline void clear_has_user_id();
+  inline void set_has_other_id();
+  inline void clear_has_other_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 user_id_;
+  ::google::protobuf::int32 other_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static AddFriend* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class RelationCommonRsp : public ::google::protobuf::Message {
+ public:
+  RelationCommonRsp();
+  virtual ~RelationCommonRsp();
+
+  RelationCommonRsp(const RelationCommonRsp& from);
+
+  inline RelationCommonRsp& operator=(const RelationCommonRsp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const RelationCommonRsp& default_instance();
+
+  void Swap(RelationCommonRsp* other);
+
+  // implements Message ----------------------------------------------
+
+  RelationCommonRsp* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const RelationCommonRsp& from);
+  void MergeFrom(const RelationCommonRsp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 ret = 2;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 2;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.RelationCommonRsp)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_ret();
+  inline void clear_has_ret();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 ret_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static RelationCommonRsp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SignOutReq : public ::google::protobuf::Message {
+ public:
+  SignOutReq();
+  virtual ~SignOutReq();
+
+  SignOutReq(const SignOutReq& from);
+
+  inline SignOutReq& operator=(const SignOutReq& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SignOutReq& default_instance();
+
+  void Swap(SignOutReq* other);
+
+  // implements Message ----------------------------------------------
+
+  SignOutReq* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SignOutReq& from);
+  void MergeFrom(const SignOutReq& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 user_id = 2;
+  inline bool has_user_id() const;
+  inline void clear_user_id();
+  static const int kUserIdFieldNumber = 2;
+  inline ::google::protobuf::int32 user_id() const;
+  inline void set_user_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.SignOutReq)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_user_id();
+  inline void clear_has_user_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 user_id_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static SignOutReq* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class SignOutRsp : public ::google::protobuf::Message {
+ public:
+  SignOutRsp();
+  virtual ~SignOutRsp();
+
+  SignOutRsp(const SignOutRsp& from);
+
+  inline SignOutRsp& operator=(const SignOutRsp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const SignOutRsp& default_instance();
+
+  void Swap(SignOutRsp* other);
+
+  // implements Message ----------------------------------------------
+
+  SignOutRsp* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const SignOutRsp& from);
+  void MergeFrom(const SignOutRsp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional int32 ver = 1;
+  inline bool has_ver() const;
+  inline void clear_ver();
+  static const int kVerFieldNumber = 1;
+  inline ::google::protobuf::int32 ver() const;
+  inline void set_ver(::google::protobuf::int32 value);
+
+  // optional int32 ret = 2;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 2;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:sxg.SignOutRsp)
+ private:
+  inline void set_has_ver();
+  inline void clear_has_ver();
+  inline void set_has_ret();
+  inline void clear_has_ret();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ver_;
+  ::google::protobuf::int32 ret_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_message_5fdefine_2eproto();
+  friend void protobuf_AssignDesc_message_5fdefine_2eproto();
+  friend void protobuf_ShutdownFile_message_5fdefine_2eproto();
+
+  void InitAsDefaultInstance();
+  static SignOutRsp* default_instance_;
+};
 // ===================================================================
 
 
@@ -2773,6 +3398,76 @@ inline void RegRsp::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
+// optional string user_name = 5;
+inline bool RegRsp::has_user_name() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void RegRsp::set_has_user_name() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void RegRsp::clear_has_user_name() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void RegRsp::clear_user_name() {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    user_name_->clear();
+  }
+  clear_has_user_name();
+}
+inline const ::std::string& RegRsp::user_name() const {
+  return *user_name_;
+}
+inline void RegRsp::set_user_name(const ::std::string& value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void RegRsp::set_user_name(const char* value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void RegRsp::set_user_name(const char* value, size_t size) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* RegRsp::mutable_user_name() {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  return user_name_;
+}
+inline ::std::string* RegRsp::release_user_name() {
+  clear_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_name_;
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void RegRsp::set_allocated_user_name(::std::string* user_name) {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete user_name_;
+  }
+  if (user_name) {
+    set_has_user_name();
+    user_name_ = user_name;
+  } else {
+    clear_has_user_name();
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // LoginReq
@@ -3053,6 +3748,76 @@ inline void LoginRsp::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
+// optional string user_name = 5;
+inline bool LoginRsp::has_user_name() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void LoginRsp::set_has_user_name() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void LoginRsp::clear_has_user_name() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void LoginRsp::clear_user_name() {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    user_name_->clear();
+  }
+  clear_has_user_name();
+}
+inline const ::std::string& LoginRsp::user_name() const {
+  return *user_name_;
+}
+inline void LoginRsp::set_user_name(const ::std::string& value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void LoginRsp::set_user_name(const char* value) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(value);
+}
+inline void LoginRsp::set_user_name(const char* value, size_t size) {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  user_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* LoginRsp::mutable_user_name() {
+  set_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    user_name_ = new ::std::string;
+  }
+  return user_name_;
+}
+inline ::std::string* LoginRsp::release_user_name() {
+  clear_has_user_name();
+  if (user_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = user_name_;
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void LoginRsp::set_allocated_user_name(::std::string* user_name) {
+  if (user_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete user_name_;
+  }
+  if (user_name) {
+    set_has_user_name();
+    user_name_ = user_name;
+  } else {
+    clear_has_user_name();
+    user_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // LogoutReq
@@ -3263,15 +4028,85 @@ inline void PublishMessageReq::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
-// optional string content = 4;
-inline bool PublishMessageReq::has_content() const {
+// optional string sublisher = 4;
+inline bool PublishMessageReq::has_sublisher() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void PublishMessageReq::set_has_content() {
+inline void PublishMessageReq::set_has_sublisher() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void PublishMessageReq::clear_has_content() {
+inline void PublishMessageReq::clear_has_sublisher() {
   _has_bits_[0] &= ~0x00000008u;
+}
+inline void PublishMessageReq::clear_sublisher() {
+  if (sublisher_ != &::google::protobuf::internal::kEmptyString) {
+    sublisher_->clear();
+  }
+  clear_has_sublisher();
+}
+inline const ::std::string& PublishMessageReq::sublisher() const {
+  return *sublisher_;
+}
+inline void PublishMessageReq::set_sublisher(const ::std::string& value) {
+  set_has_sublisher();
+  if (sublisher_ == &::google::protobuf::internal::kEmptyString) {
+    sublisher_ = new ::std::string;
+  }
+  sublisher_->assign(value);
+}
+inline void PublishMessageReq::set_sublisher(const char* value) {
+  set_has_sublisher();
+  if (sublisher_ == &::google::protobuf::internal::kEmptyString) {
+    sublisher_ = new ::std::string;
+  }
+  sublisher_->assign(value);
+}
+inline void PublishMessageReq::set_sublisher(const char* value, size_t size) {
+  set_has_sublisher();
+  if (sublisher_ == &::google::protobuf::internal::kEmptyString) {
+    sublisher_ = new ::std::string;
+  }
+  sublisher_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* PublishMessageReq::mutable_sublisher() {
+  set_has_sublisher();
+  if (sublisher_ == &::google::protobuf::internal::kEmptyString) {
+    sublisher_ = new ::std::string;
+  }
+  return sublisher_;
+}
+inline ::std::string* PublishMessageReq::release_sublisher() {
+  clear_has_sublisher();
+  if (sublisher_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = sublisher_;
+    sublisher_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void PublishMessageReq::set_allocated_sublisher(::std::string* sublisher) {
+  if (sublisher_ != &::google::protobuf::internal::kEmptyString) {
+    delete sublisher_;
+  }
+  if (sublisher) {
+    set_has_sublisher();
+    sublisher_ = sublisher;
+  } else {
+    clear_has_sublisher();
+    sublisher_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// optional string content = 5;
+inline bool PublishMessageReq::has_content() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void PublishMessageReq::set_has_content() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void PublishMessageReq::clear_has_content() {
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void PublishMessageReq::clear_content() {
   if (content_ != &::google::protobuf::internal::kEmptyString) {
@@ -3475,168 +4310,6 @@ inline void GetMessageReq::set_user_id(::google::protobuf::int32 value) {
 
 // -------------------------------------------------------------------
 
-// MessageBase
-
-// optional int32 ver = 1;
-inline bool MessageBase::has_ver() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void MessageBase::set_has_ver() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void MessageBase::clear_has_ver() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void MessageBase::clear_ver() {
-  ver_ = 0;
-  clear_has_ver();
-}
-inline ::google::protobuf::int32 MessageBase::ver() const {
-  return ver_;
-}
-inline void MessageBase::set_ver(::google::protobuf::int32 value) {
-  set_has_ver();
-  ver_ = value;
-}
-
-// optional int32 message_id = 2;
-inline bool MessageBase::has_message_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void MessageBase::set_has_message_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void MessageBase::clear_has_message_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void MessageBase::clear_message_id() {
-  message_id_ = 0;
-  clear_has_message_id();
-}
-inline ::google::protobuf::int32 MessageBase::message_id() const {
-  return message_id_;
-}
-inline void MessageBase::set_message_id(::google::protobuf::int32 value) {
-  set_has_message_id();
-  message_id_ = value;
-}
-
-// optional int32 publisher = 3;
-inline bool MessageBase::has_publisher() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void MessageBase::set_has_publisher() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void MessageBase::clear_has_publisher() {
-  _has_bits_[0] &= ~0x00000004u;
-}
-inline void MessageBase::clear_publisher() {
-  publisher_ = 0;
-  clear_has_publisher();
-}
-inline ::google::protobuf::int32 MessageBase::publisher() const {
-  return publisher_;
-}
-inline void MessageBase::set_publisher(::google::protobuf::int32 value) {
-  set_has_publisher();
-  publisher_ = value;
-}
-
-// optional string content = 4;
-inline bool MessageBase::has_content() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void MessageBase::set_has_content() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void MessageBase::clear_has_content() {
-  _has_bits_[0] &= ~0x00000008u;
-}
-inline void MessageBase::clear_content() {
-  if (content_ != &::google::protobuf::internal::kEmptyString) {
-    content_->clear();
-  }
-  clear_has_content();
-}
-inline const ::std::string& MessageBase::content() const {
-  return *content_;
-}
-inline void MessageBase::set_content(const ::std::string& value) {
-  set_has_content();
-  if (content_ == &::google::protobuf::internal::kEmptyString) {
-    content_ = new ::std::string;
-  }
-  content_->assign(value);
-}
-inline void MessageBase::set_content(const char* value) {
-  set_has_content();
-  if (content_ == &::google::protobuf::internal::kEmptyString) {
-    content_ = new ::std::string;
-  }
-  content_->assign(value);
-}
-inline void MessageBase::set_content(const char* value, size_t size) {
-  set_has_content();
-  if (content_ == &::google::protobuf::internal::kEmptyString) {
-    content_ = new ::std::string;
-  }
-  content_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* MessageBase::mutable_content() {
-  set_has_content();
-  if (content_ == &::google::protobuf::internal::kEmptyString) {
-    content_ = new ::std::string;
-  }
-  return content_;
-}
-inline ::std::string* MessageBase::release_content() {
-  clear_has_content();
-  if (content_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = content_;
-    content_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void MessageBase::set_allocated_content(::std::string* content) {
-  if (content_ != &::google::protobuf::internal::kEmptyString) {
-    delete content_;
-  }
-  if (content) {
-    set_has_content();
-    content_ = content;
-  } else {
-    clear_has_content();
-    content_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// optional int32 publish_time = 5;
-inline bool MessageBase::has_publish_time() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void MessageBase::set_has_publish_time() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void MessageBase::clear_has_publish_time() {
-  _has_bits_[0] &= ~0x00000010u;
-}
-inline void MessageBase::clear_publish_time() {
-  publish_time_ = 0;
-  clear_has_publish_time();
-}
-inline ::google::protobuf::int32 MessageBase::publish_time() const {
-  return publish_time_;
-}
-inline void MessageBase::set_publish_time(::google::protobuf::int32 value) {
-  set_has_publish_time();
-  publish_time_ = value;
-}
-
-// -------------------------------------------------------------------
-
 // GetMessageRsp
 
 // optional int32 ver = 1;
@@ -3705,27 +4378,27 @@ inline void GetMessageRsp::set_ret(::google::protobuf::int32 value) {
   ret_ = value;
 }
 
-// repeated .sxg.MessageBase message_list = 4;
+// repeated .sxg.MessageInfoBase message_list = 4;
 inline int GetMessageRsp::message_list_size() const {
   return message_list_.size();
 }
 inline void GetMessageRsp::clear_message_list() {
   message_list_.Clear();
 }
-inline const ::sxg::MessageBase& GetMessageRsp::message_list(int index) const {
+inline const ::sxg::MessageInfoBase& GetMessageRsp::message_list(int index) const {
   return message_list_.Get(index);
 }
-inline ::sxg::MessageBase* GetMessageRsp::mutable_message_list(int index) {
+inline ::sxg::MessageInfoBase* GetMessageRsp::mutable_message_list(int index) {
   return message_list_.Mutable(index);
 }
-inline ::sxg::MessageBase* GetMessageRsp::add_message_list() {
+inline ::sxg::MessageInfoBase* GetMessageRsp::add_message_list() {
   return message_list_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::sxg::MessageBase >&
+inline const ::google::protobuf::RepeatedPtrField< ::sxg::MessageInfoBase >&
 GetMessageRsp::message_list() const {
   return message_list_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::sxg::MessageBase >*
+inline ::google::protobuf::RepeatedPtrField< ::sxg::MessageInfoBase >*
 GetMessageRsp::mutable_message_list() {
   return &message_list_;
 }
@@ -3870,41 +4543,117 @@ inline void GetPhotoRsp::set_ret(::google::protobuf::int32 value) {
   ret_ = value;
 }
 
-// optional .sxg.MessageBase last_message = 4;
-inline bool GetPhotoRsp::has_last_message() const {
+// optional int32 message_id = 4;
+inline bool GetPhotoRsp::has_message_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void GetPhotoRsp::set_has_last_message() {
+inline void GetPhotoRsp::set_has_message_id() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void GetPhotoRsp::clear_has_last_message() {
+inline void GetPhotoRsp::clear_has_message_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void GetPhotoRsp::clear_last_message() {
-  if (last_message_ != NULL) last_message_->::sxg::MessageBase::Clear();
-  clear_has_last_message();
+inline void GetPhotoRsp::clear_message_id() {
+  message_id_ = 0;
+  clear_has_message_id();
 }
-inline const ::sxg::MessageBase& GetPhotoRsp::last_message() const {
-  return last_message_ != NULL ? *last_message_ : *default_instance_->last_message_;
+inline ::google::protobuf::int32 GetPhotoRsp::message_id() const {
+  return message_id_;
 }
-inline ::sxg::MessageBase* GetPhotoRsp::mutable_last_message() {
-  set_has_last_message();
-  if (last_message_ == NULL) last_message_ = new ::sxg::MessageBase;
-  return last_message_;
+inline void GetPhotoRsp::set_message_id(::google::protobuf::int32 value) {
+  set_has_message_id();
+  message_id_ = value;
 }
-inline ::sxg::MessageBase* GetPhotoRsp::release_last_message() {
-  clear_has_last_message();
-  ::sxg::MessageBase* temp = last_message_;
-  last_message_ = NULL;
-  return temp;
+
+// optional int32 publish_time = 5;
+inline bool GetPhotoRsp::has_publish_time() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void GetPhotoRsp::set_allocated_last_message(::sxg::MessageBase* last_message) {
-  delete last_message_;
-  last_message_ = last_message;
-  if (last_message) {
-    set_has_last_message();
+inline void GetPhotoRsp::set_has_publish_time() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void GetPhotoRsp::clear_has_publish_time() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void GetPhotoRsp::clear_publish_time() {
+  publish_time_ = 0;
+  clear_has_publish_time();
+}
+inline ::google::protobuf::int32 GetPhotoRsp::publish_time() const {
+  return publish_time_;
+}
+inline void GetPhotoRsp::set_publish_time(::google::protobuf::int32 value) {
+  set_has_publish_time();
+  publish_time_ = value;
+}
+
+// optional string publisher = 6;
+inline bool GetPhotoRsp::has_publisher() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void GetPhotoRsp::set_has_publisher() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void GetPhotoRsp::clear_has_publisher() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void GetPhotoRsp::clear_publisher() {
+  if (publisher_ != &::google::protobuf::internal::kEmptyString) {
+    publisher_->clear();
+  }
+  clear_has_publisher();
+}
+inline const ::std::string& GetPhotoRsp::publisher() const {
+  return *publisher_;
+}
+inline void GetPhotoRsp::set_publisher(const ::std::string& value) {
+  set_has_publisher();
+  if (publisher_ == &::google::protobuf::internal::kEmptyString) {
+    publisher_ = new ::std::string;
+  }
+  publisher_->assign(value);
+}
+inline void GetPhotoRsp::set_publisher(const char* value) {
+  set_has_publisher();
+  if (publisher_ == &::google::protobuf::internal::kEmptyString) {
+    publisher_ = new ::std::string;
+  }
+  publisher_->assign(value);
+}
+inline void GetPhotoRsp::set_publisher(const char* value, size_t size) {
+  set_has_publisher();
+  if (publisher_ == &::google::protobuf::internal::kEmptyString) {
+    publisher_ = new ::std::string;
+  }
+  publisher_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* GetPhotoRsp::mutable_publisher() {
+  set_has_publisher();
+  if (publisher_ == &::google::protobuf::internal::kEmptyString) {
+    publisher_ = new ::std::string;
+  }
+  return publisher_;
+}
+inline ::std::string* GetPhotoRsp::release_publisher() {
+  clear_has_publisher();
+  if (publisher_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
   } else {
-    clear_has_last_message();
+    ::std::string* temp = publisher_;
+    publisher_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void GetPhotoRsp::set_allocated_publisher(::std::string* publisher) {
+  if (publisher_ != &::google::protobuf::internal::kEmptyString) {
+    delete publisher_;
+  }
+  if (publisher) {
+    set_has_publisher();
+    publisher_ = publisher;
+  } else {
+    clear_has_publisher();
+    publisher_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
 }
 
@@ -4552,6 +5301,424 @@ inline ::google::protobuf::int32 DelBlackRsp::ret() const {
   return ret_;
 }
 inline void DelBlackRsp::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AdminCmd
+
+// optional int32 ver = 1;
+inline bool AdminCmd::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AdminCmd::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AdminCmd::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AdminCmd::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 AdminCmd::ver() const {
+  return ver_;
+}
+inline void AdminCmd::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 mess_type = 2;
+inline bool AdminCmd::has_mess_type() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AdminCmd::set_has_mess_type() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AdminCmd::clear_has_mess_type() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AdminCmd::clear_mess_type() {
+  mess_type_ = 0;
+  clear_has_mess_type();
+}
+inline ::google::protobuf::int32 AdminCmd::mess_type() const {
+  return mess_type_;
+}
+inline void AdminCmd::set_mess_type(::google::protobuf::int32 value) {
+  set_has_mess_type();
+  mess_type_ = value;
+}
+
+// optional int32 user_id = 3;
+inline bool AdminCmd::has_user_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AdminCmd::set_has_user_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AdminCmd::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AdminCmd::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+inline ::google::protobuf::int32 AdminCmd::user_id() const {
+  return user_id_;
+}
+inline void AdminCmd::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+}
+
+// optional int32 cmd_id = 4;
+inline bool AdminCmd::has_cmd_id() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void AdminCmd::set_has_cmd_id() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void AdminCmd::clear_has_cmd_id() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void AdminCmd::clear_cmd_id() {
+  cmd_id_ = 0;
+  clear_has_cmd_id();
+}
+inline ::google::protobuf::int32 AdminCmd::cmd_id() const {
+  return cmd_id_;
+}
+inline void AdminCmd::set_cmd_id(::google::protobuf::int32 value) {
+  set_has_cmd_id();
+  cmd_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// UserRelation
+
+// optional int32 ver = 1;
+inline bool UserRelation::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void UserRelation::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void UserRelation::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void UserRelation::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 UserRelation::ver() const {
+  return ver_;
+}
+inline void UserRelation::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 user_id = 2;
+inline bool UserRelation::has_user_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void UserRelation::set_has_user_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void UserRelation::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void UserRelation::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+inline ::google::protobuf::int32 UserRelation::user_id() const {
+  return user_id_;
+}
+inline void UserRelation::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RelationUser
+
+// optional int32 ver = 1;
+inline bool RelationUser::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RelationUser::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RelationUser::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RelationUser::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 RelationUser::ver() const {
+  return ver_;
+}
+inline void RelationUser::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional .sxg.RelationInfoBase rela_info = 2;
+inline bool RelationUser::has_rela_info() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RelationUser::set_has_rela_info() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RelationUser::clear_has_rela_info() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void RelationUser::clear_rela_info() {
+  if (rela_info_ != NULL) rela_info_->::sxg::RelationInfoBase::Clear();
+  clear_has_rela_info();
+}
+inline const ::sxg::RelationInfoBase& RelationUser::rela_info() const {
+  return rela_info_ != NULL ? *rela_info_ : *default_instance_->rela_info_;
+}
+inline ::sxg::RelationInfoBase* RelationUser::mutable_rela_info() {
+  set_has_rela_info();
+  if (rela_info_ == NULL) rela_info_ = new ::sxg::RelationInfoBase;
+  return rela_info_;
+}
+inline ::sxg::RelationInfoBase* RelationUser::release_rela_info() {
+  clear_has_rela_info();
+  ::sxg::RelationInfoBase* temp = rela_info_;
+  rela_info_ = NULL;
+  return temp;
+}
+inline void RelationUser::set_allocated_rela_info(::sxg::RelationInfoBase* rela_info) {
+  delete rela_info_;
+  rela_info_ = rela_info;
+  if (rela_info) {
+    set_has_rela_info();
+  } else {
+    clear_has_rela_info();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AddFriend
+
+// optional int32 ver = 1;
+inline bool AddFriend::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AddFriend::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AddFriend::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AddFriend::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 AddFriend::ver() const {
+  return ver_;
+}
+inline void AddFriend::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 user_id = 2;
+inline bool AddFriend::has_user_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AddFriend::set_has_user_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AddFriend::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AddFriend::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+inline ::google::protobuf::int32 AddFriend::user_id() const {
+  return user_id_;
+}
+inline void AddFriend::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+}
+
+// optional int32 other_id = 3;
+inline bool AddFriend::has_other_id() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void AddFriend::set_has_other_id() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void AddFriend::clear_has_other_id() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void AddFriend::clear_other_id() {
+  other_id_ = 0;
+  clear_has_other_id();
+}
+inline ::google::protobuf::int32 AddFriend::other_id() const {
+  return other_id_;
+}
+inline void AddFriend::set_other_id(::google::protobuf::int32 value) {
+  set_has_other_id();
+  other_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// RelationCommonRsp
+
+// optional int32 ver = 1;
+inline bool RelationCommonRsp::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void RelationCommonRsp::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void RelationCommonRsp::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void RelationCommonRsp::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 RelationCommonRsp::ver() const {
+  return ver_;
+}
+inline void RelationCommonRsp::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 ret = 2;
+inline bool RelationCommonRsp::has_ret() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void RelationCommonRsp::set_has_ret() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void RelationCommonRsp::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void RelationCommonRsp::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 RelationCommonRsp::ret() const {
+  return ret_;
+}
+inline void RelationCommonRsp::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SignOutReq
+
+// optional int32 ver = 1;
+inline bool SignOutReq::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SignOutReq::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SignOutReq::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SignOutReq::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 SignOutReq::ver() const {
+  return ver_;
+}
+inline void SignOutReq::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 user_id = 2;
+inline bool SignOutReq::has_user_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SignOutReq::set_has_user_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SignOutReq::clear_has_user_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SignOutReq::clear_user_id() {
+  user_id_ = 0;
+  clear_has_user_id();
+}
+inline ::google::protobuf::int32 SignOutReq::user_id() const {
+  return user_id_;
+}
+inline void SignOutReq::set_user_id(::google::protobuf::int32 value) {
+  set_has_user_id();
+  user_id_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// SignOutRsp
+
+// optional int32 ver = 1;
+inline bool SignOutRsp::has_ver() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void SignOutRsp::set_has_ver() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void SignOutRsp::clear_has_ver() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void SignOutRsp::clear_ver() {
+  ver_ = 0;
+  clear_has_ver();
+}
+inline ::google::protobuf::int32 SignOutRsp::ver() const {
+  return ver_;
+}
+inline void SignOutRsp::set_ver(::google::protobuf::int32 value) {
+  set_has_ver();
+  ver_ = value;
+}
+
+// optional int32 ret = 2;
+inline bool SignOutRsp::has_ret() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void SignOutRsp::set_has_ret() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void SignOutRsp::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void SignOutRsp::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 SignOutRsp::ret() const {
+  return ret_;
+}
+inline void SignOutRsp::set_ret(::google::protobuf::int32 value) {
   set_has_ret();
   ret_ = value;
 }

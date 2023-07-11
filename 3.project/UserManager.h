@@ -27,6 +27,7 @@ public:
 	int LoginCheck(const char* user_name,const char* user_pswd);
 	int UserLogout(int user_id,int now);
 	int GetUserIdByUserName(const char* user_name);
+	const char* GetUserNameByUserId(const int user_id);
 	int UpdateUserLoginTime(int user_id, int time_now);
 	int UpdateUserFreshTime(int user_id, int time_now);
 };
