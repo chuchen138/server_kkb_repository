@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "string": "c",
+        "*.tcc": "cpp",
+        "iostream": "cpp",
+        "numeric": "cpp",
+        "streambuf": "cpp",
+        "user_info_base.pb.h": "c",
+        "istream": "c"
+    }
+}

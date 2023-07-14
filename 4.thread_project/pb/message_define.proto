@@ -1,0 +1,182 @@
+package sxg;
+
+message RegReq{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; //401
+        optional string user_name = 3;
+        optional string password = 4;
+	optional int32 from = 5;
+	optional int32 t1 = 31;
+	optional int32 t2 = 32;
+	optional int32 t3 = 33;
+};
+
+message RegRsp{
+	optional int32 ver = 1;
+        optional int32 mess_type = 2; // 402
+        optional int32 ret = 3;
+        optional int32 user_id = 4;
+	optional string user_name = 5;
+};
+
+
+message LoginReq{
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;// 101
+    optional string user_name = 3;
+    optional string password = 4;
+};
+
+message LoginRsp{
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;// 102
+    optional int32 ret = 3;
+    optional int32 user_id = 4;
+    optional string user_name = 5;
+};
+
+message LogoutReq{
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;// 103
+    optional int32 user_id = 3;
+};
+
+message LogoutRsp{
+    
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;// 104
+    optional int32 ret = 3;
+};
+
+message PublishMessageReq{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; //201
+	optional int32 user_id = 3;
+	optional string sublisher = 4;
+	optional string content = 5;	
+}
+
+message PublishMessageRsp{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; //202
+	optional int32 ret = 3;
+}
+
+message GetMessageReq{
+	optional int32 ver = 1;
+        optional int32 mess_type = 2; //203
+	optional int32 user_id = 3;
+}
+
+import "message_info_base.proto";
+
+message GetMessageRsp{
+        optional int32 ver = 1;
+        optional int32 mess_type = 2; // 204
+	optional int32 ret = 3;
+	repeated MessageInfoBase message_list = 4;
+}
+
+message GetPhotoReq{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; // 205
+	optional int32 user_id = 3;
+};
+
+message GetPhotoRsp{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; // 206
+	optional int32 ret = 3;
+        optional int32 message_id=4;
+        optional int32 publish_time=5;
+	optional string publisher=6;
+}
+
+message AddFriendReq{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; // 301
+	optional int32 user_id = 3;
+	optional int32 other_id = 4;
+}
+
+message AddFriendRsp{
+	optional int32 ver = 1;
+        optional int32 mess_type = 2; // 302
+	optional int32 ret = 3;
+}
+
+message DelFriendReq{
+	optional int32 ver = 1;
+	optional int32 mess_type = 2; // 303
+        optional int32 user_id = 3;
+        optional int32 other_id = 4;
+}
+
+message DelFriendRsp{
+	optional int32 ver = 1;
+        optional int32 mess_type = 2; // 304
+        optional int32 ret = 3;
+}
+
+message AddBlackReq{
+        optional int32 ver = 1;
+        optional int32 mess_type = 2; // 305
+        optional int32 user_id = 3;
+        optional int32 other_id = 4;
+}
+
+message AddBlackRsp{
+        optional int32 ver = 1;
+        optional int32 mess_type = 2; // 306
+        optional int32 ret = 3;
+}
+
+message DelBlackReq{
+        optional int32 ver = 1;
+        optional int32 mess_type = 2; // 307
+        optional int32 user_id = 3;
+        optional int32 other_id = 4;
+}
+
+message DelBlackRsp{
+        optional int32 ver = 1;
+        optional int32 mess_type = 2; // 308
+        optional int32 ret = 3;
+}
+
+message AdminCmd{
+    optional int32 ver = 1;
+    optional int32 mess_type = 2;
+    optional int32 user_id = 3;
+    optional int32 cmd_id = 4;
+};
+
+message UserRelation{
+    optional int32 ver = 1;
+    optional int32 user_id = 2;
+};
+import "relation_info_base.proto";
+message RelationUser{
+    optional int32 ver = 1;
+    optional RelationInfoBase rela_info = 2;
+};
+
+message AddFriend{
+        optional int32 ver = 1;
+        optional int32 user_id = 2;
+        optional int32 other_id = 3;
+};
+message RelationCommonRsp{
+        optional int32 ver = 1;
+        optional int32 ret = 2;
+};
+
+message SignOutReq{
+        optional int32 ver = 1;
+        optional int32 user_id = 2;
+}
+
+message SignOutRsp{
+        optional int32 ver = 1;
+        optional int32 ret = 2;
+}

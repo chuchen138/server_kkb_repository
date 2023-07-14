@@ -1,0 +1,60 @@
+#ifndef _MESS_TYPE_H_
+#define _MESS_TYPE_H_
+
+#define LOGIN_REQ 101
+#define LOGIN_RSP 102
+
+#define LOGOUT_REQ 103
+#define LOGOUT_RSP 104
+
+#define ADD_FRIEND_REQ 301
+#define ADD_FRIEND_RSP 302
+
+#define DEL_FRIEND_REQ 303
+#define DEL_FRIEND_RSP 304
+
+#define ADD_BLACK_REQ 305
+#define ADD_BLACK_RSP 306
+
+#define DEL_BLACK_REQ 307
+#define DEL_BLACK_RSP 308
+
+#define PUBLISH_MESSAGE_REQ 201
+#define PUBLISH_MESSAGE_RSP 202
+
+#define GET_PHOTO_REQ 203
+#define GET_PHOTO_RSP 204
+
+#define GET_MESSAGE_LIST_REQ 205
+#define GET_MESSAGE_LIST_RSP 206
+
+#undef REG_RSP
+#define REG_REQ 401
+#define REG_RSP 402
+
+#define SIGN_OUT_REQ 501
+#define SIGN_OUT_RSP 502
+
+#define ADMIN 901
+// bus opretor
+#define USER_RELA_BUS_TYPE 6
+#define RELATION_INIT 601
+#define GET_RELATION 602
+#define ADD_FRIEND 603
+#define DEL_FRIEND 604
+#define ADD_BLACK 605
+#define DEL_BLACK 606
+
+// message
+#define USER_MESS_BUS_TYPE 7
+#define PUBLISH_MESSAGE 701
+#define GET_MESSAGE 702
+
+// photo
+#define USER_PHOTO_BUS_TYPE 8
+#define GET_PHOTO 801
+#define SET_PHOTO 802
+
+
+#endif
+
