@@ -38,7 +38,7 @@ db:mydb.cpp
 server:1.server.c UserManager.cpp RelationManager.cpp RelationInfo.cpp MessageManager.cpp PhotoManager.cpp mydb.cpp BusManager.cpp 
 	@#g++ -o $@ $(INC_PROTOBUF) $(LIB_PROTOBUF) $(LIB_MYSQL) $(OBJ_SSP) $^ 
 	@g++ $(OBJ_SSP) $^ -o $@ $(INC_PROTOBUF) $(LIB_PROTOBUF) $(LIB_MYSQL)
-client:2.client.c
+client:4.client.c
 	@g++ $(OBJ_SSP) $^ -o client $(LIB_PROTOBUF) 
 project:3.server.c
 	g++ $(OBJ_SSP) $(OBJ_THREAD) $^ -o $@ $(INC_PROTOBUF) $(LIB_PROTOBUF) $(LIB_MYSQL) $(LIB_THREAD) -D _D

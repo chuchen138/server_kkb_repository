@@ -1572,12 +1572,17 @@ class AddFriendReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
-  // optional int32 other_id = 4;
-  inline bool has_other_id() const;
-  inline void clear_other_id();
-  static const int kOtherIdFieldNumber = 4;
-  inline ::google::protobuf::int32 other_id() const;
-  inline void set_other_id(::google::protobuf::int32 value);
+  // optional string other_name = 4;
+  inline bool has_other_name() const;
+  inline void clear_other_name();
+  static const int kOtherNameFieldNumber = 4;
+  inline const ::std::string& other_name() const;
+  inline void set_other_name(const ::std::string& value);
+  inline void set_other_name(const char* value);
+  inline void set_other_name(const char* value, size_t size);
+  inline ::std::string* mutable_other_name();
+  inline ::std::string* release_other_name();
+  inline void set_allocated_other_name(::std::string* other_name);
 
   // @@protoc_insertion_point(class_scope:sxg.AddFriendReq)
  private:
@@ -1587,15 +1592,15 @@ class AddFriendReq : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
-  inline void set_has_other_id();
-  inline void clear_has_other_id();
+  inline void set_has_other_name();
+  inline void clear_has_other_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
+  ::std::string* other_name_;
   ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 other_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -1786,12 +1791,17 @@ class DelFriendReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
-  // optional int32 other_id = 4;
-  inline bool has_other_id() const;
-  inline void clear_other_id();
-  static const int kOtherIdFieldNumber = 4;
-  inline ::google::protobuf::int32 other_id() const;
-  inline void set_other_id(::google::protobuf::int32 value);
+  // optional string other_name = 4;
+  inline bool has_other_name() const;
+  inline void clear_other_name();
+  static const int kOtherNameFieldNumber = 4;
+  inline const ::std::string& other_name() const;
+  inline void set_other_name(const ::std::string& value);
+  inline void set_other_name(const char* value);
+  inline void set_other_name(const char* value, size_t size);
+  inline ::std::string* mutable_other_name();
+  inline ::std::string* release_other_name();
+  inline void set_allocated_other_name(::std::string* other_name);
 
   // @@protoc_insertion_point(class_scope:sxg.DelFriendReq)
  private:
@@ -1801,15 +1811,15 @@ class DelFriendReq : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
-  inline void set_has_other_id();
-  inline void clear_has_other_id();
+  inline void set_has_other_name();
+  inline void clear_has_other_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
+  ::std::string* other_name_;
   ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 other_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -2000,12 +2010,17 @@ class AddBlackReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
-  // optional int32 other_id = 4;
-  inline bool has_other_id() const;
-  inline void clear_other_id();
-  static const int kOtherIdFieldNumber = 4;
-  inline ::google::protobuf::int32 other_id() const;
-  inline void set_other_id(::google::protobuf::int32 value);
+  // optional string other_name = 4;
+  inline bool has_other_name() const;
+  inline void clear_other_name();
+  static const int kOtherNameFieldNumber = 4;
+  inline const ::std::string& other_name() const;
+  inline void set_other_name(const ::std::string& value);
+  inline void set_other_name(const char* value);
+  inline void set_other_name(const char* value, size_t size);
+  inline ::std::string* mutable_other_name();
+  inline ::std::string* release_other_name();
+  inline void set_allocated_other_name(::std::string* other_name);
 
   // @@protoc_insertion_point(class_scope:sxg.AddBlackReq)
  private:
@@ -2015,15 +2030,15 @@ class AddBlackReq : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
-  inline void set_has_other_id();
-  inline void clear_has_other_id();
+  inline void set_has_other_name();
+  inline void clear_has_other_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
+  ::std::string* other_name_;
   ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 other_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -2214,12 +2229,17 @@ class DelBlackReq : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 user_id() const;
   inline void set_user_id(::google::protobuf::int32 value);
 
-  // optional int32 other_id = 4;
-  inline bool has_other_id() const;
-  inline void clear_other_id();
-  static const int kOtherIdFieldNumber = 4;
-  inline ::google::protobuf::int32 other_id() const;
-  inline void set_other_id(::google::protobuf::int32 value);
+  // optional string other_name = 4;
+  inline bool has_other_name() const;
+  inline void clear_other_name();
+  static const int kOtherNameFieldNumber = 4;
+  inline const ::std::string& other_name() const;
+  inline void set_other_name(const ::std::string& value);
+  inline void set_other_name(const char* value);
+  inline void set_other_name(const char* value, size_t size);
+  inline ::std::string* mutable_other_name();
+  inline ::std::string* release_other_name();
+  inline void set_allocated_other_name(::std::string* other_name);
 
   // @@protoc_insertion_point(class_scope:sxg.DelBlackReq)
  private:
@@ -2229,15 +2249,15 @@ class DelBlackReq : public ::google::protobuf::Message {
   inline void clear_has_mess_type();
   inline void set_has_user_id();
   inline void clear_has_user_id();
-  inline void set_has_other_id();
-  inline void clear_has_other_id();
+  inline void set_has_other_name();
+  inline void clear_has_other_name();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int32 ver_;
   ::google::protobuf::int32 mess_type_;
+  ::std::string* other_name_;
   ::google::protobuf::int32 user_id_;
-  ::google::protobuf::int32 other_id_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
@@ -4727,26 +4747,74 @@ inline void AddFriendReq::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
-// optional int32 other_id = 4;
-inline bool AddFriendReq::has_other_id() const {
+// optional string other_name = 4;
+inline bool AddFriendReq::has_other_name() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void AddFriendReq::set_has_other_id() {
+inline void AddFriendReq::set_has_other_name() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void AddFriendReq::clear_has_other_id() {
+inline void AddFriendReq::clear_has_other_name() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void AddFriendReq::clear_other_id() {
-  other_id_ = 0;
-  clear_has_other_id();
+inline void AddFriendReq::clear_other_name() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    other_name_->clear();
+  }
+  clear_has_other_name();
 }
-inline ::google::protobuf::int32 AddFriendReq::other_id() const {
-  return other_id_;
+inline const ::std::string& AddFriendReq::other_name() const {
+  return *other_name_;
 }
-inline void AddFriendReq::set_other_id(::google::protobuf::int32 value) {
-  set_has_other_id();
-  other_id_ = value;
+inline void AddFriendReq::set_other_name(const ::std::string& value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void AddFriendReq::set_other_name(const char* value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void AddFriendReq::set_other_name(const char* value, size_t size) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AddFriendReq::mutable_other_name() {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  return other_name_;
+}
+inline ::std::string* AddFriendReq::release_other_name() {
+  clear_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = other_name_;
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AddFriendReq::set_allocated_other_name(::std::string* other_name) {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
+  if (other_name) {
+    set_has_other_name();
+    other_name_ = other_name;
+  } else {
+    clear_has_other_name();
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -4889,26 +4957,74 @@ inline void DelFriendReq::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
-// optional int32 other_id = 4;
-inline bool DelFriendReq::has_other_id() const {
+// optional string other_name = 4;
+inline bool DelFriendReq::has_other_name() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void DelFriendReq::set_has_other_id() {
+inline void DelFriendReq::set_has_other_name() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void DelFriendReq::clear_has_other_id() {
+inline void DelFriendReq::clear_has_other_name() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void DelFriendReq::clear_other_id() {
-  other_id_ = 0;
-  clear_has_other_id();
+inline void DelFriendReq::clear_other_name() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    other_name_->clear();
+  }
+  clear_has_other_name();
 }
-inline ::google::protobuf::int32 DelFriendReq::other_id() const {
-  return other_id_;
+inline const ::std::string& DelFriendReq::other_name() const {
+  return *other_name_;
 }
-inline void DelFriendReq::set_other_id(::google::protobuf::int32 value) {
-  set_has_other_id();
-  other_id_ = value;
+inline void DelFriendReq::set_other_name(const ::std::string& value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void DelFriendReq::set_other_name(const char* value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void DelFriendReq::set_other_name(const char* value, size_t size) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DelFriendReq::mutable_other_name() {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  return other_name_;
+}
+inline ::std::string* DelFriendReq::release_other_name() {
+  clear_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = other_name_;
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DelFriendReq::set_allocated_other_name(::std::string* other_name) {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
+  if (other_name) {
+    set_has_other_name();
+    other_name_ = other_name;
+  } else {
+    clear_has_other_name();
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -5051,26 +5167,74 @@ inline void AddBlackReq::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
-// optional int32 other_id = 4;
-inline bool AddBlackReq::has_other_id() const {
+// optional string other_name = 4;
+inline bool AddBlackReq::has_other_name() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void AddBlackReq::set_has_other_id() {
+inline void AddBlackReq::set_has_other_name() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void AddBlackReq::clear_has_other_id() {
+inline void AddBlackReq::clear_has_other_name() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void AddBlackReq::clear_other_id() {
-  other_id_ = 0;
-  clear_has_other_id();
+inline void AddBlackReq::clear_other_name() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    other_name_->clear();
+  }
+  clear_has_other_name();
 }
-inline ::google::protobuf::int32 AddBlackReq::other_id() const {
-  return other_id_;
+inline const ::std::string& AddBlackReq::other_name() const {
+  return *other_name_;
 }
-inline void AddBlackReq::set_other_id(::google::protobuf::int32 value) {
-  set_has_other_id();
-  other_id_ = value;
+inline void AddBlackReq::set_other_name(const ::std::string& value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void AddBlackReq::set_other_name(const char* value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void AddBlackReq::set_other_name(const char* value, size_t size) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AddBlackReq::mutable_other_name() {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  return other_name_;
+}
+inline ::std::string* AddBlackReq::release_other_name() {
+  clear_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = other_name_;
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AddBlackReq::set_allocated_other_name(::std::string* other_name) {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
+  if (other_name) {
+    set_has_other_name();
+    other_name_ = other_name;
+  } else {
+    clear_has_other_name();
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -5213,26 +5377,74 @@ inline void DelBlackReq::set_user_id(::google::protobuf::int32 value) {
   user_id_ = value;
 }
 
-// optional int32 other_id = 4;
-inline bool DelBlackReq::has_other_id() const {
+// optional string other_name = 4;
+inline bool DelBlackReq::has_other_name() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void DelBlackReq::set_has_other_id() {
+inline void DelBlackReq::set_has_other_name() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void DelBlackReq::clear_has_other_id() {
+inline void DelBlackReq::clear_has_other_name() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void DelBlackReq::clear_other_id() {
-  other_id_ = 0;
-  clear_has_other_id();
+inline void DelBlackReq::clear_other_name() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    other_name_->clear();
+  }
+  clear_has_other_name();
 }
-inline ::google::protobuf::int32 DelBlackReq::other_id() const {
-  return other_id_;
+inline const ::std::string& DelBlackReq::other_name() const {
+  return *other_name_;
 }
-inline void DelBlackReq::set_other_id(::google::protobuf::int32 value) {
-  set_has_other_id();
-  other_id_ = value;
+inline void DelBlackReq::set_other_name(const ::std::string& value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void DelBlackReq::set_other_name(const char* value) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(value);
+}
+inline void DelBlackReq::set_other_name(const char* value, size_t size) {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  other_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* DelBlackReq::mutable_other_name() {
+  set_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    other_name_ = new ::std::string;
+  }
+  return other_name_;
+}
+inline ::std::string* DelBlackReq::release_other_name() {
+  clear_has_other_name();
+  if (other_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = other_name_;
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void DelBlackReq::set_allocated_other_name(::std::string* other_name) {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
+  if (other_name) {
+    set_has_other_name();
+    other_name_ = other_name;
+  } else {
+    clear_has_other_name();
+    other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------

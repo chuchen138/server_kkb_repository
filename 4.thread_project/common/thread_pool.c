@@ -16,7 +16,7 @@ void task_queue_push(TQ tq, void *data, int fd){
     pthread_mutex_lock(&tq->mutex);
     DBG("in task_queue_push.\n");
     if(tq->total == tq->size){
-        DBG(RED"<Push> queue is full!\n"NONE);
+        DBG(RED "<Push> queue is full!\n" NONE);
         pthread_mutex_unlock(&tq->mutex);
         return;
     }
@@ -25,11 +25,11 @@ void task_queue_push(TQ tq, void *data, int fd){
     tq->nfds[tq->tail] = fd;
     DBG("task_queue_push fd = %d.\n", fd);
     tq->data[tq->tail] = data;
-    DBG(YELLOW"<Push> [%d] successfully!\n"NONE, tq->tail);
+    DBG(YELLOW "<Push> [%d] successfully!\n" NONE, tq->tail);
     // 3.判断尾部是否超界
     if(++tq->tail == tq->size){
         tq->tail = 0;
-        DBG(BLUE"<Push> tail is zero.\n"NONE);
+        DBG(BLUE "<Push> tail is zero.\n" NONE);
     }
     // 4.解锁
     pthread_cond_signal(&tq->cond);
@@ -43,18 +43,18 @@ void* task_queue_pop(TQ tq, int *fd_ptr){
     // 2.当队列为空，循环等待
     while(tq->total == 0){
         pthread_cond_wait(&tq->cond,&tq->mutex);
-        DBG(RED"<Pop> queue is empty!\n"NONE);
+        DBG(RED "<Pop> queue is empty!\n" NONE);
     }
     // 3.总和减一，头减一
     void *data = tq->data[tq->head];
     *fd_ptr = tq->nfds[tq->head];
     DBG("task_queue_pop fd = %d.\n", *fd_ptr);
     tq->total--;
-    DBG(YELLOW"<Pop> [%d] successfully!\n"NONE, tq->head);
+    DBG(YELLOW "<Pop> [%d] successfully!\n" NONE, tq->head);
     if(++tq->head == tq->size){
         tq->head = 0;
         sleep(3);
-        DBG(BLUE"<Pop> tq->head is zero!\n"NONE);
+        DBG(BLUE "<Pop> tq->head is zero!\n" NONE);
     }
     // 4.解锁
     pthread_mutex_unlock(&tq->mutex);

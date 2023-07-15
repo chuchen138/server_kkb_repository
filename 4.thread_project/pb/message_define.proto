@@ -96,7 +96,7 @@ message AddFriendReq{
 	optional int32 ver = 1;
 	optional int32 mess_type = 2; // 301
 	optional int32 user_id = 3;
-	optional int32 other_id = 4;
+	optional string other_name = 4;
 }
 
 message AddFriendRsp{
@@ -109,7 +109,7 @@ message DelFriendReq{
 	optional int32 ver = 1;
 	optional int32 mess_type = 2; // 303
         optional int32 user_id = 3;
-        optional int32 other_id = 4;
+        optional string other_name = 4;
 }
 
 message DelFriendRsp{
@@ -122,7 +122,7 @@ message AddBlackReq{
         optional int32 ver = 1;
         optional int32 mess_type = 2; // 305
         optional int32 user_id = 3;
-        optional int32 other_id = 4;
+        optional string other_name = 4;
 }
 
 message AddBlackRsp{
@@ -135,7 +135,7 @@ message DelBlackReq{
         optional int32 ver = 1;
         optional int32 mess_type = 2; // 307
         optional int32 user_id = 3;
-        optional int32 other_id = 4;
+        optional string other_name = 4;
 }
 
 message DelBlackRsp{

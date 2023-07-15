@@ -16,7 +16,7 @@ int RelationInfo::GetBlackUserIdByIndex(int index){
 }
 
 int RelationInfo::CheckFriend(int other_id){
-    for(int i=0;i<friend_count_;i++){
+    for(int i=0;i<friend_count();i++){
         if(friend_list_[i]==other_id){
             return ALREADY_FRIEND;
         }

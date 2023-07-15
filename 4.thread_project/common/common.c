@@ -203,11 +203,11 @@ int socket_connect_timeout(const char *ip, int port, int timeout){
     }
 
     if(error != 0){
-        DBG(RED"Error : connect error!\n"NONE);
+        DBG(RED "Error : connect error!\n" NONE);
         return -1;
     }
     make_block(sockfd);
-    DBG(GREEN"Success : connection Successfully!\n"NONE);
+    DBG(GREEN "Success : connection Successfully!\n" NONE);
 
     return sockfd;
 }

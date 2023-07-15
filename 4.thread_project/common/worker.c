@@ -14,6 +14,7 @@ extern PhotoManager photo_svr;
 extern DbManager db_svr;
 extern BusManager bus_svr;
 
+// unorder_map<int,int> Fd2User_id;
 static int SetRspMessType(char *mess_type, char *send_buffer){
 	if(strlen(mess_type)>=3){
 		send_buffer[0]=mess_type[0];
@@ -69,14 +70,15 @@ void *thread_work(void *arg){
 	char send_buffer[4100];
 	char mess_type_str[32];
 	const int debug_on = 1;
-	int ret = 0;
+	int ret = 0, other_id = 0;
     TQ tq = (TQ)arg;
-    DBG(GREEN "thread_pid = %ld,work begin\n" NONE,pthread_self());
-    printf(GREEN "print thread_pid = %ld,work begin\n" NONE,pthread_self());
+    DBG(GREEN "worker thread_pid = %ld,work begin\n" NONE,pthread_self());
+    // printf(GREEN "print thread_pid = %ld,work begin\n" NONE,pthread_self());
 
     while(1){
 		int fd;
 		int now = time(NULL);
+		memset(send_buffer,0,sizeof(send_buffer));
 		char *recv_buffer= (char *)task_queue_pop(tq, &fd);
 		int mess_type = (recv_buffer[0]-'0')*100+(recv_buffer[1]-'0')*10+recv_buffer[2]-'0';
 		// DBG(GREEN "thread_pid = %ld,recv message : %d\n" NONE,pthread_self(),mess_type);
@@ -138,16 +140,13 @@ void *thread_work(void *arg){
                 SocketSendRsp(fd,msgLoginRsp.ByteSize()+3,send_buffer);
 				break;
 			case ADD_FRIEND_REQ:
-				msgAddFriendReq.ParseFromArray(recv_buffer+3,10240);
-				printf("301 req{uid1:%d uid2:%d}\n",msgAddFriendReq.user_id(),msgAddFriendReq.other_id());
+				msgAddFriendReq.ParseFromArray(recv_buffer+3,4096);
+				other_id = user_svr.GetUserIdByUserName(msgAddFriendReq.other_name().c_str());
+				printf("301 req{uid1:%d uid2:%d}\n",msgAddFriendReq.user_id(),other_id);
 				ret = user_svr.CheckExist(msgAddFriendReq.user_id());
-				if(ret==USER_EXIST){
-					ret=user_svr.CheckExist(msgAddFriendReq.other_id());
-					if(ret==USER_EXIST){
-						ret=rela_svr.AddFriend(	msgAddFriendReq.user_id(),
-												msgAddFriendReq.other_id());
-												msgAddFriendRsp.set_ret(ret);
-					}
+				if(ret==USER_EXIST && other_id!= USER_NOT_EXIST){
+					ret=rela_svr.AddFriend(	msgAddFriendReq.user_id(),
+												other_id);
 					msgAddFriendRsp.set_ret(ret);
 				}else{
 					msgAddFriendRsp.set_ret(ret);
@@ -155,64 +154,54 @@ void *thread_work(void *arg){
 				printf("302 msgAddFriendRsp ret:%d\n",ret);fflush(stdout);
 				sprintf(mess_type_str,"%d",ADD_FRIEND_RSP);
                 SetRspMessType(mess_type_str, send_buffer);
-                msgAddFriendRsp.SerializeToArray(send_buffer+3,10240);
+                msgAddFriendRsp.SerializeToArray(send_buffer+3,4096);
 				if(debug_on)printf("[DEBUG   ]ret_byte_size:%d\n",ret);
                 SocketSendRsp(fd,msgAddFriendRsp.ByteSize()+3,send_buffer);
 				break;
             case DEL_FRIEND_REQ:
-				msgDelFriendReq.ParseFromArray(recv_buffer+3,10240);
-				if(debug_on)printf("[DEBUG   ]mess_type:303, uid1:%d uid2:%d\n",msgDelFriendReq.user_id(),msgDelFriendReq.other_id());
+				msgDelFriendReq.ParseFromArray(recv_buffer+3,4096);
+				other_id = user_svr.GetUserIdByUserName(msgDelFriendReq.other_name().c_str());
+				DBG("[DEBUG   ]mess_type:303, uid1:%d uid2:%d\n",msgDelFriendReq.user_id(),other_id);
 				ret = user_svr.CheckExist(msgDelFriendReq.user_id());
-				if(ret==USER_EXIST){
-					ret=user_svr.CheckExist(msgDelFriendReq.other_id());
-					if(ret==USER_EXIST){
-						ret=rela_svr.DeleteFriend(	msgDelFriendReq.user_id(),
-									msgDelFriendReq.other_id());
+				if(ret==USER_EXIST && other_id!= USER_NOT_EXIST){
+					ret=rela_svr.DeleteFriend(	msgDelFriendReq.user_id(),
+									other_id);
 						msgDelFriendRsp.set_ret(ret);
-					}else{
-						msgDelFriendRsp.set_ret(ret);
-					}
 				}else{
 					msgDelFriendRsp.set_ret(ret);
 				}
 				if(debug_on)printf("[DEBUG   ]304 DelFriendRsp ret:%d\n",ret);fflush(stdout);
 				sprintf(mess_type_str,"%d",DEL_FRIEND_RSP);
 				SetRspMessType(mess_type_str, send_buffer);
-				ret=msgDelFriendRsp.SerializeToArray(send_buffer+3,10240);
+				ret=msgDelFriendRsp.SerializeToArray(send_buffer+3,4090);
 				if(debug_on)printf("[DEBUG   ]ret_byte_size:%d\n",ret);
                 SocketSendRsp(fd,msgDelFriendRsp.ByteSize()+3,send_buffer);
                 break;
 				case ADD_BLACK_REQ:
-					msgAddBlackReq.ParseFromArray(recv_buffer+3,10240);
+					msgAddBlackReq.ParseFromArray(recv_buffer+3,4096);
+					other_id = user_svr.GetUserIdByUserName(msgAddBlackReq.other_name().c_str());
 					ret = user_svr.CheckExist(msgAddBlackReq.user_id());
-					if(ret==USER_EXIST){
-						ret=user_svr.CheckExist(msgAddBlackReq.other_id());
-						if(ret==USER_EXIST){
-							ret=rela_svr.AddBlack(	msgAddBlackReq.user_id(),
-										msgAddBlackReq.other_id());
-										msgAddBlackRsp.set_ret(ret);
-						}
+					if(ret==USER_EXIST && other_id!= USER_NOT_EXIST){
+						ret=rela_svr.AddBlack(	msgAddBlackReq.user_id(),
+										other_id);
 						msgAddBlackRsp.set_ret(ret);
+						
 					}else{
 						msgAddBlackRsp.set_ret(ret);
 					}
-					msgAddBlackRsp.set_ret(ret);
                     sprintf(mess_type_str,"%d",mess_type+1);
                     SetRspMessType(mess_type_str, send_buffer);
-					msgAddBlackRsp.SerializeToArray(send_buffer+3,10240);
+					msgAddBlackRsp.SerializeToArray(send_buffer+3,4090);
                 	SocketSendRsp(fd,msgAddBlackRsp.ByteSize()+3,send_buffer);
 				break;
 				// 删除黑名单
 				case DEL_BLACK_REQ:
 					msgDelBlackReq.ParseFromArray(recv_buffer+3,10240);
+					other_id = user_svr.GetUserIdByUserName(msgDelBlackReq.other_name().c_str());
 					ret = user_svr.CheckExist(msgDelBlackReq.user_id());
-					if(ret==USER_EXIST){
-						ret=user_svr.CheckExist(msgDelBlackReq.other_id());
-						if(ret==USER_EXIST){
-							ret=rela_svr.DeleteBlack(	msgDelBlackReq.user_id(),
-										msgDelBlackReq.other_id());
-										msgDelBlackRsp.set_ret(ret);
-						}
+					if(ret==USER_EXIST && other_id!= USER_NOT_EXIST){
+						ret=rela_svr.DeleteBlack(	msgDelBlackReq.user_id(),
+										other_id);
 						msgDelBlackRsp.set_ret(ret);
 					}else{
 						msgDelBlackRsp.set_ret(ret);
@@ -220,17 +209,20 @@ void *thread_work(void *arg){
 					msgDelBlackRsp.set_ret(ret);
                     sprintf(mess_type_str,"%d",mess_type+1);
                     SetRspMessType(mess_type_str, send_buffer);
-					msgDelBlackRsp.SerializeToArray(send_buffer+3,10240);
+					msgDelBlackRsp.SerializeToArray(send_buffer+3,4090);
                 SocketSendRsp(fd,msgDelBlackRsp.ByteSize()+3,send_buffer);
 				break;
 				case PUBLISH_MESSAGE_REQ:
-				msgPublishMessageReq.ParseFromArray(recv_buffer+3,10240);
+				msgPublishMessageReq.ParseFromArray(recv_buffer+3,4096);
 				ret = user_svr.CheckExist(msgPublishMessageReq.user_id());
-				printf("recv : %s\n",msgPublishMessageReq.content().c_str());
+				printf("PUBLISH_MESSAGE_REQ recv : %s, ret = %d\n",
+					msgPublishMessageReq.content().c_str(),ret);
 				if(ret==USER_EXIST){
 					ret = user_svr.GetUserIdByUserName(msgPublishMessageReq.sublisher().c_str());
 					int checkFriendRet = rela_svr.CheckFriend(msgPublishMessageReq.user_id(),ret);
 					int checkBlackRet = rela_svr.CheckBlack(msgPublishMessageReq.user_id(),ret);
+					// printf(YELLOW "user_id = %d,ret = %d,checkFriendRet:%d checkBlackRet:%d\n" NONE,\
+					// 	msgPublishMessageReq.sublisher(),ret,checkFriendRet,checkBlackRet);
 					if(ret != USER_NOT_EXIST && (checkBlackRet==ALREADY_BLACK || checkFriendRet==ALREADY_FRIEND)){
 						MessageInfo message;
 						// message.set_message_id(1); /* todo get from mysql */
@@ -322,6 +314,8 @@ void *thread_work(void *arg){
 				printf("unknown mess_type: %d\n",mess_type);
 				break;
 		}
+		
+		memset(recv_buffer,0,sizeof(send_buffer));
 
     }
     

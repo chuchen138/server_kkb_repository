@@ -27,7 +27,15 @@ void RelationManager::Start(){
 	}
 	printf("========================================\n");
 	for(int i=0;i<relation_count();i++){
-		printf("| user_id: %d | friend | black |\n",relations_[i].user_id());
+		printf("| user_id: %d | friend : ",relations_[i].user_id());
+		for(int j=0;j<relations_[i].friend_count();j++){
+			printf("%d ",relations_[i].friend_list_[j]);
+		}
+		printf("| black : ");
+		for(int j=0;j<relations_[i].black_count();j++){
+			printf("%d \n",relations_[i].black_list_[j]);
+		}
+		printf("\n");
 	}
 	printf("========================================\n");
 	printf("RelationManager::Start Over\n");

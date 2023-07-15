@@ -336,7 +336,7 @@ void protobuf_AssignDesc_message_5fdefine_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddFriendReq, ver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddFriendReq, mess_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddFriendReq, user_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddFriendReq, other_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddFriendReq, other_name_),
   };
   AddFriendReq_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -371,7 +371,7 @@ void protobuf_AssignDesc_message_5fdefine_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelFriendReq, ver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelFriendReq, mess_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelFriendReq, user_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelFriendReq, other_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelFriendReq, other_name_),
   };
   DelFriendReq_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -406,7 +406,7 @@ void protobuf_AssignDesc_message_5fdefine_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddBlackReq, ver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddBlackReq, mess_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddBlackReq, user_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddBlackReq, other_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AddBlackReq, other_name_),
   };
   AddBlackReq_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -441,7 +441,7 @@ void protobuf_AssignDesc_message_5fdefine_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelBlackReq, ver_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelBlackReq, mess_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelBlackReq, user_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelBlackReq, other_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DelBlackReq, other_name_),
   };
   DelBlackReq_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -750,30 +750,31 @@ void protobuf_AddDesc_message_5fdefine_2eproto() {
     "\"w\n\013GetPhotoRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_typ"
     "e\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\022\022\n\nmessage_id\030\004 \001(\005"
     "\022\024\n\014publish_time\030\005 \001(\005\022\021\n\tpublisher\030\006 \001("
-    "\t\"Q\n\014AddFriendReq\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_t"
-    "ype\030\002 \001(\005\022\017\n\007user_id\030\003 \001(\005\022\020\n\010other_id\030\004"
-    " \001(\005\";\n\014AddFriendRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmes"
-    "s_type\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\"Q\n\014DelFriendRe"
-    "q\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\017\n\007use"
-    "r_id\030\003 \001(\005\022\020\n\010other_id\030\004 \001(\005\";\n\014DelFrien"
-    "dRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\013\n\003"
-    "ret\030\003 \001(\005\"P\n\013AddBlackReq\022\013\n\003ver\030\001 \001(\005\022\021\n"
-    "\tmess_type\030\002 \001(\005\022\017\n\007user_id\030\003 \001(\005\022\020\n\010oth"
-    "er_id\030\004 \001(\005\":\n\013AddBlackRsp\022\013\n\003ver\030\001 \001(\005\022"
-    "\021\n\tmess_type\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\"P\n\013DelBl"
-    "ackReq\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\017"
-    "\n\007user_id\030\003 \001(\005\022\020\n\010other_id\030\004 \001(\005\":\n\013Del"
-    "BlackRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005"
-    "\022\013\n\003ret\030\003 \001(\005\"K\n\010AdminCmd\022\013\n\003ver\030\001 \001(\005\022\021"
-    "\n\tmess_type\030\002 \001(\005\022\017\n\007user_id\030\003 \001(\005\022\016\n\006cm"
-    "d_id\030\004 \001(\005\",\n\014UserRelation\022\013\n\003ver\030\001 \001(\005\022"
-    "\017\n\007user_id\030\002 \001(\005\"E\n\014RelationUser\022\013\n\003ver\030"
-    "\001 \001(\005\022(\n\trela_info\030\002 \001(\0132\025.sxg.RelationI"
-    "nfoBase\";\n\tAddFriend\022\013\n\003ver\030\001 \001(\005\022\017\n\007use"
-    "r_id\030\002 \001(\005\022\020\n\010other_id\030\003 \001(\005\"-\n\021Relation"
-    "CommonRsp\022\013\n\003ver\030\001 \001(\005\022\013\n\003ret\030\002 \001(\005\"*\n\nS"
-    "ignOutReq\022\013\n\003ver\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\""
-    "&\n\nSignOutRsp\022\013\n\003ver\030\001 \001(\005\022\013\n\003ret\030\002 \001(\005", 2079);
+    "\t\"S\n\014AddFriendReq\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_t"
+    "ype\030\002 \001(\005\022\017\n\007user_id\030\003 \001(\005\022\022\n\nother_name"
+    "\030\004 \001(\t\";\n\014AddFriendRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tm"
+    "ess_type\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\"S\n\014DelFriend"
+    "Req\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\017\n\007u"
+    "ser_id\030\003 \001(\005\022\022\n\nother_name\030\004 \001(\t\";\n\014DelF"
+    "riendRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005"
+    "\022\013\n\003ret\030\003 \001(\005\"R\n\013AddBlackReq\022\013\n\003ver\030\001 \001("
+    "\005\022\021\n\tmess_type\030\002 \001(\005\022\017\n\007user_id\030\003 \001(\005\022\022\n"
+    "\nother_name\030\004 \001(\t\":\n\013AddBlackRsp\022\013\n\003ver\030"
+    "\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\"R\n"
+    "\013DelBlackReq\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_type\030\002"
+    " \001(\005\022\017\n\007user_id\030\003 \001(\005\022\022\n\nother_name\030\004 \001("
+    "\t\":\n\013DelBlackRsp\022\013\n\003ver\030\001 \001(\005\022\021\n\tmess_ty"
+    "pe\030\002 \001(\005\022\013\n\003ret\030\003 \001(\005\"K\n\010AdminCmd\022\013\n\003ver"
+    "\030\001 \001(\005\022\021\n\tmess_type\030\002 \001(\005\022\017\n\007user_id\030\003 \001"
+    "(\005\022\016\n\006cmd_id\030\004 \001(\005\",\n\014UserRelation\022\013\n\003ve"
+    "r\030\001 \001(\005\022\017\n\007user_id\030\002 \001(\005\"E\n\014RelationUser"
+    "\022\013\n\003ver\030\001 \001(\005\022(\n\trela_info\030\002 \001(\0132\025.sxg.R"
+    "elationInfoBase\";\n\tAddFriend\022\013\n\003ver\030\001 \001("
+    "\005\022\017\n\007user_id\030\002 \001(\005\022\020\n\010other_id\030\003 \001(\005\"-\n\021"
+    "RelationCommonRsp\022\013\n\003ver\030\001 \001(\005\022\013\n\003ret\030\002 "
+    "\001(\005\"*\n\nSignOutReq\022\013\n\003ver\030\001 \001(\005\022\017\n\007user_i"
+    "d\030\002 \001(\005\"&\n\nSignOutRsp\022\013\n\003ver\030\001 \001(\005\022\013\n\003re"
+    "t\030\002 \001(\005", 2087);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "message_define.proto", &protobuf_RegisterTypes);
   RegReq::default_instance_ = new RegReq();
@@ -5095,7 +5096,7 @@ void GetPhotoRsp::Swap(GetPhotoRsp* other) {
 const int AddFriendReq::kVerFieldNumber;
 const int AddFriendReq::kMessTypeFieldNumber;
 const int AddFriendReq::kUserIdFieldNumber;
-const int AddFriendReq::kOtherIdFieldNumber;
+const int AddFriendReq::kOtherNameFieldNumber;
 #endif  // !_MSC_VER
 
 AddFriendReq::AddFriendReq()
@@ -5117,7 +5118,7 @@ void AddFriendReq::SharedCtor() {
   ver_ = 0;
   mess_type_ = 0;
   user_id_ = 0;
-  other_id_ = 0;
+  other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -5126,6 +5127,9 @@ AddFriendReq::~AddFriendReq() {
 }
 
 void AddFriendReq::SharedDtor() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -5156,7 +5160,11 @@ void AddFriendReq::Clear() {
     ver_ = 0;
     mess_type_ = 0;
     user_id_ = 0;
-    other_id_ = 0;
+    if (has_other_name()) {
+      if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+        other_name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -5211,19 +5219,20 @@ bool AddFriendReq::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_other_id;
+        if (input->ExpectTag(34)) goto parse_other_name;
         break;
       }
 
-      // optional int32 other_id = 4;
+      // optional string other_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_other_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &other_id_)));
-          set_has_other_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_other_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_other_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->other_name().data(), this->other_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -5264,9 +5273,13 @@ void AddFriendReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->user_id(), output);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->other_id(), output);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->other_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -5292,9 +5305,14 @@ void AddFriendReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->user_id(), target);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->other_id(), target);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->other_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -5329,11 +5347,11 @@ int AddFriendReq::ByteSize() const {
           this->user_id());
     }
 
-    // optional int32 other_id = 4;
-    if (has_other_id()) {
+    // optional string other_name = 4;
+    if (has_other_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->other_id());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->other_name());
     }
 
   }
@@ -5372,8 +5390,8 @@ void AddFriendReq::MergeFrom(const AddFriendReq& from) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
-    if (from.has_other_id()) {
-      set_other_id(from.other_id());
+    if (from.has_other_name()) {
+      set_other_name(from.other_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -5401,7 +5419,7 @@ void AddFriendReq::Swap(AddFriendReq* other) {
     std::swap(ver_, other->ver_);
     std::swap(mess_type_, other->mess_type_);
     std::swap(user_id_, other->user_id_);
-    std::swap(other_id_, other->other_id_);
+    std::swap(other_name_, other->other_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -5711,7 +5729,7 @@ void AddFriendRsp::Swap(AddFriendRsp* other) {
 const int DelFriendReq::kVerFieldNumber;
 const int DelFriendReq::kMessTypeFieldNumber;
 const int DelFriendReq::kUserIdFieldNumber;
-const int DelFriendReq::kOtherIdFieldNumber;
+const int DelFriendReq::kOtherNameFieldNumber;
 #endif  // !_MSC_VER
 
 DelFriendReq::DelFriendReq()
@@ -5733,7 +5751,7 @@ void DelFriendReq::SharedCtor() {
   ver_ = 0;
   mess_type_ = 0;
   user_id_ = 0;
-  other_id_ = 0;
+  other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -5742,6 +5760,9 @@ DelFriendReq::~DelFriendReq() {
 }
 
 void DelFriendReq::SharedDtor() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -5772,7 +5793,11 @@ void DelFriendReq::Clear() {
     ver_ = 0;
     mess_type_ = 0;
     user_id_ = 0;
-    other_id_ = 0;
+    if (has_other_name()) {
+      if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+        other_name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -5827,19 +5852,20 @@ bool DelFriendReq::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_other_id;
+        if (input->ExpectTag(34)) goto parse_other_name;
         break;
       }
 
-      // optional int32 other_id = 4;
+      // optional string other_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_other_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &other_id_)));
-          set_has_other_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_other_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_other_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->other_name().data(), this->other_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -5880,9 +5906,13 @@ void DelFriendReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->user_id(), output);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->other_id(), output);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->other_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -5908,9 +5938,14 @@ void DelFriendReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->user_id(), target);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->other_id(), target);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->other_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -5945,11 +5980,11 @@ int DelFriendReq::ByteSize() const {
           this->user_id());
     }
 
-    // optional int32 other_id = 4;
-    if (has_other_id()) {
+    // optional string other_name = 4;
+    if (has_other_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->other_id());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->other_name());
     }
 
   }
@@ -5988,8 +6023,8 @@ void DelFriendReq::MergeFrom(const DelFriendReq& from) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
-    if (from.has_other_id()) {
-      set_other_id(from.other_id());
+    if (from.has_other_name()) {
+      set_other_name(from.other_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6017,7 +6052,7 @@ void DelFriendReq::Swap(DelFriendReq* other) {
     std::swap(ver_, other->ver_);
     std::swap(mess_type_, other->mess_type_);
     std::swap(user_id_, other->user_id_);
-    std::swap(other_id_, other->other_id_);
+    std::swap(other_name_, other->other_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6327,7 +6362,7 @@ void DelFriendRsp::Swap(DelFriendRsp* other) {
 const int AddBlackReq::kVerFieldNumber;
 const int AddBlackReq::kMessTypeFieldNumber;
 const int AddBlackReq::kUserIdFieldNumber;
-const int AddBlackReq::kOtherIdFieldNumber;
+const int AddBlackReq::kOtherNameFieldNumber;
 #endif  // !_MSC_VER
 
 AddBlackReq::AddBlackReq()
@@ -6349,7 +6384,7 @@ void AddBlackReq::SharedCtor() {
   ver_ = 0;
   mess_type_ = 0;
   user_id_ = 0;
-  other_id_ = 0;
+  other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6358,6 +6393,9 @@ AddBlackReq::~AddBlackReq() {
 }
 
 void AddBlackReq::SharedDtor() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -6388,7 +6426,11 @@ void AddBlackReq::Clear() {
     ver_ = 0;
     mess_type_ = 0;
     user_id_ = 0;
-    other_id_ = 0;
+    if (has_other_name()) {
+      if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+        other_name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -6443,19 +6485,20 @@ bool AddBlackReq::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_other_id;
+        if (input->ExpectTag(34)) goto parse_other_name;
         break;
       }
 
-      // optional int32 other_id = 4;
+      // optional string other_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_other_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &other_id_)));
-          set_has_other_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_other_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_other_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->other_name().data(), this->other_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -6496,9 +6539,13 @@ void AddBlackReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->user_id(), output);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->other_id(), output);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->other_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -6524,9 +6571,14 @@ void AddBlackReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->user_id(), target);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->other_id(), target);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->other_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -6561,11 +6613,11 @@ int AddBlackReq::ByteSize() const {
           this->user_id());
     }
 
-    // optional int32 other_id = 4;
-    if (has_other_id()) {
+    // optional string other_name = 4;
+    if (has_other_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->other_id());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->other_name());
     }
 
   }
@@ -6604,8 +6656,8 @@ void AddBlackReq::MergeFrom(const AddBlackReq& from) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
-    if (from.has_other_id()) {
-      set_other_id(from.other_id());
+    if (from.has_other_name()) {
+      set_other_name(from.other_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -6633,7 +6685,7 @@ void AddBlackReq::Swap(AddBlackReq* other) {
     std::swap(ver_, other->ver_);
     std::swap(mess_type_, other->mess_type_);
     std::swap(user_id_, other->user_id_);
-    std::swap(other_id_, other->other_id_);
+    std::swap(other_name_, other->other_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -6943,7 +6995,7 @@ void AddBlackRsp::Swap(AddBlackRsp* other) {
 const int DelBlackReq::kVerFieldNumber;
 const int DelBlackReq::kMessTypeFieldNumber;
 const int DelBlackReq::kUserIdFieldNumber;
-const int DelBlackReq::kOtherIdFieldNumber;
+const int DelBlackReq::kOtherNameFieldNumber;
 #endif  // !_MSC_VER
 
 DelBlackReq::DelBlackReq()
@@ -6965,7 +7017,7 @@ void DelBlackReq::SharedCtor() {
   ver_ = 0;
   mess_type_ = 0;
   user_id_ = 0;
-  other_id_ = 0;
+  other_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -6974,6 +7026,9 @@ DelBlackReq::~DelBlackReq() {
 }
 
 void DelBlackReq::SharedDtor() {
+  if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete other_name_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -7004,7 +7059,11 @@ void DelBlackReq::Clear() {
     ver_ = 0;
     mess_type_ = 0;
     user_id_ = 0;
-    other_id_ = 0;
+    if (has_other_name()) {
+      if (other_name_ != &::google::protobuf::internal::kEmptyString) {
+        other_name_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -7059,19 +7118,20 @@ bool DelBlackReq::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(32)) goto parse_other_id;
+        if (input->ExpectTag(34)) goto parse_other_name;
         break;
       }
 
-      // optional int32 other_id = 4;
+      // optional string other_name = 4;
       case 4: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_other_id:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &other_id_)));
-          set_has_other_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_other_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_other_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->other_name().data(), this->other_name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -7112,9 +7172,13 @@ void DelBlackReq::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->user_id(), output);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->other_id(), output);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->other_name(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -7140,9 +7204,14 @@ void DelBlackReq::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->user_id(), target);
   }
 
-  // optional int32 other_id = 4;
-  if (has_other_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->other_id(), target);
+  // optional string other_name = 4;
+  if (has_other_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->other_name().data(), this->other_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->other_name(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -7177,11 +7246,11 @@ int DelBlackReq::ByteSize() const {
           this->user_id());
     }
 
-    // optional int32 other_id = 4;
-    if (has_other_id()) {
+    // optional string other_name = 4;
+    if (has_other_name()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->other_id());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->other_name());
     }
 
   }
@@ -7220,8 +7289,8 @@ void DelBlackReq::MergeFrom(const DelBlackReq& from) {
     if (from.has_user_id()) {
       set_user_id(from.user_id());
     }
-    if (from.has_other_id()) {
-      set_other_id(from.other_id());
+    if (from.has_other_name()) {
+      set_other_name(from.other_name());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -7249,7 +7318,7 @@ void DelBlackReq::Swap(DelBlackReq* other) {
     std::swap(ver_, other->ver_);
     std::swap(mess_type_, other->mess_type_);
     std::swap(user_id_, other->user_id_);
-    std::swap(other_id_, other->other_id_);
+    std::swap(other_name_, other->other_name_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

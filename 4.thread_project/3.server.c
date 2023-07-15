@@ -121,7 +121,7 @@ int main(int argc, char *argv[]){
 		rela_svr.Proc();
 		mess_svr.Proc();
 		photo_svr.Proc();
-        printf(RED "proc \n\n" NONE);
+        printf(NONE "proc  \n\n" NONE);
         usleep(5000);/* 5ms */
     }
 	user_svr.Shutdown();
