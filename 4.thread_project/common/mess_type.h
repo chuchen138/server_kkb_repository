@@ -55,6 +55,6 @@
 #define GET_PHOTO 801
 #define SET_PHOTO 802
 
-
+#define SOCKET_EXIT_REQ 999
 #endif
 

@@ -15,9 +15,11 @@ void RelationManager::Start(){
 	if(ret==SUCCESS){
 		ret=db_svr_->GetRelasOneByOne(&relations_[ui]);
 		if(ret==SUCCESS)ui++;
+Id2Rela_idx[relations_[ui].user_id()]=ui;
 		while(ret!=DB_NO_MORE_DATA){
 			ret=db_svr_->GetRelasOneByOne(&relations_[ui]);
 			if(ret==SUCCESS)ui++;
+Id2Rela_idx[relations_[ui].user_id()]=ui;
 		}
 		ret=db_svr_->GetRelasEnd();
 		set_relation_count(ui);
@@ -59,15 +61,20 @@ void RelationManager::Restart(){
 int RelationManager::UserRelationInit(int user_id){
 	relations_[relation_count_].set_user_id(user_id);
 	relations_[relation_count_].set_db_flag(FLAG_INSERT);
+Id2Rela_idx[user_id]=relation_count()+1;
 	set_relation_count(relation_count()+1);
     return 0;
 }
 
 RelationInfo* RelationManager::GetRelation(int user_id){
-	for(int i=0;i<relation_count();i++){
-		if(relations_[i].user_id()==user_id){
-			return &relations_[i];
-		}
+	// for(int i=0;i<relation_count();i++){
+	// 	if(relations_[i].user_id()==user_id){
+	// 		return &relations_[i];
+	// 	}
+	// }
+	int idx = Id2Rela_idx[user_id]-1;
+	if(idx >= 0){
+		return &relations_[idx];
 	}
 	return NULL;
 }
@@ -118,13 +125,19 @@ int RelationManager::DeleteBlack(int user_id,int other_id){
 }
 
 int RelationManager::DeleteRela(int user_id){
-	for(int i=0;i<relation_count();i++){
-		if(relations_[i].user_id()==user_id){
-			printf("USER EXIST %d\n",relations_[i].user_id());
-            relations_[i].set_db_flag(FLAG_DELETE);
-			// users[i].set_user_id(-1);
-			return USER_EXIST;
-		}
+	// for(int i=0;i<relation_count();i++){
+	// 	if(relations_[i].user_id()==user_id){
+	// 		printf("USER EXIST %d\n",relations_[i].user_id());
+    //         relations_[i].set_db_flag(FLAG_DELETE);
+	// 		// users[i].set_user_id(-1);
+	// 		return USER_EXIST;
+	// 	}
+	// }
+	int idx = Id2Rela_idx[user_id]-1;
+	if(idx >= 0){
+		printf("USER EXIST %d\n",relations_[idx].user_id());
+		relations_[idx].set_db_flag(FLAG_DELETE);
+		return USER_EXIST;
 	}
 	return 0;
 }
@@ -175,20 +188,28 @@ void RelationManager::SaveRelation(){
 
 
 int RelationManager::CheckFriend(int user_id,int check_id){
-	for(int i=0;i<relation_count();i++){
-		if(relations_[i].user_id()==user_id){
-            return relations_[i].CheckFriend(check_id);
-			// users[i].set_user_id(-1);
-		}
+	// for(int i=0;i<relation_count();i++){
+	// 	if(relations_[i].user_id()==user_id){
+    //         return relations_[i].CheckFriend(check_id);
+	// 		// users[i].set_user_id(-1);
+	// 	}
+	// }
+	int idx = Id2Rela_idx[user_id]-1;
+	if(idx >= 0){
+		return relations_[idx].CheckFriend(check_id);
 	}
 	return 0;
 }
 int RelationManager::CheckBlack(int user_id,int check_id){
-	for(int i=0;i<relation_count();i++){
-		if(relations_[i].user_id()==user_id){
-            return relations_[i].CheckBlack(check_id);
-			// users[i].set_user_id(-1);
-		}
+	// for(int i=0;i<relation_count();i++){
+	// 	if(relations_[i].user_id()==user_id){
+    //         return relations_[i].CheckBlack(check_id);
+	// 		// users[i].set_user_id(-1);
+	// 	}
+	// }
+	int idx = Id2Rela_idx[user_id]-1;
+	if(idx >= 0){
+		return relations_[idx].CheckBlack(check_id);
 	}
 	return 0;
 }

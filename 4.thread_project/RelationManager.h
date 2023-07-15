@@ -9,6 +9,7 @@ private:
     RelationInfo relations_[1024];
     GETSETVAR(int,relation_count);
     DbManager* db_svr_;
+    std::unordered_map<int,int> Id2Rela_idx;
 public:
     void Start();
     void Proc();

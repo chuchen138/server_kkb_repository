@@ -7,6 +7,7 @@
         "streambuf": "cpp",
         "user_info_base.pb.h": "c",
         "istream": "c",
-        "mess_type.h": "c"
+        "mess_type.h": "c",
+        "photo_info_base.pb.h": "c"
     }
 }

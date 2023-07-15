@@ -8,6 +8,7 @@ private:
 	PhotoInfo photos_[10240];
 	GETSETVAR(int,photo_count)
     DbManager* db_svr_;
+	std::unordered_map<int, int> Id2Photo_map;
 
 public:
 	void Start();

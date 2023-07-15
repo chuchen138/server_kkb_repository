@@ -8,6 +8,7 @@ private:
     MessageInfo messages_[256];
     GETSETVAR(int,message_count);
     DbManager* db_svr_;
+    std::unordered_map<int,int> Id2Mess_map;
 public:
     void Start();
     void Proc();
@@ -21,6 +22,7 @@ public:
     MessageInfo *GetMessageByMessageId(int message_id);
 	int PublishMessage(MessageInfo message);
     int DeleteMessage(int message_id);
+    int DeleteMessageByUserId(int user_id);
 };
 
 

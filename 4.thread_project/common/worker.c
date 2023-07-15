@@ -14,7 +14,7 @@ extern PhotoManager photo_svr;
 extern DbManager db_svr;
 extern BusManager bus_svr;
 
-// unorder_map<int,int> Fd2User_id;
+std::unordered_map<int,int> Fd2UserID;
 static int SetRspMessType(char *mess_type, char *send_buffer){
 	if(strlen(mess_type)>=3){
 		send_buffer[0]=mess_type[0];
@@ -104,6 +104,7 @@ void *thread_work(void *arg){
                 	msgRegRsp.set_user_id(register_user_id);
 					msgRegRsp.set_user_name(msgRegReq.user_name());
 					rela_svr.UserRelationInit(register_user_id);
+					Fd2UserID[fd] =  register_user_id;
 				}
 				sprintf(mess_type_str,"%d",mess_type+1);
                 SetRspMessType(mess_type_str, send_buffer);
@@ -123,6 +124,7 @@ void *thread_work(void *arg){
 					int user_id=user_svr.GetUserIdByUserName(msgLoginReq.user_name().c_str());
 					user_svr.UpdateUserLoginTime(user_id, now);
 					msgLoginRsp.set_user_id(user_id);
+					Fd2UserID[fd] = user_id;
 				}else{
 					// printf(RED "login fail, ret = %d\n" NONE,ret);
 					msgLoginRsp.set_ret(ret);
@@ -283,21 +285,22 @@ void *thread_work(void *arg){
 					
 					sprintf(mess_type_str,"%d",mess_type+1);
 					SetRspMessType(mess_type_str, send_buffer);
-					msgGetPhotoRsp.SerializeToArray(send_buffer+3,10240);
+					msgGetPhotoRsp.SerializeToArray(send_buffer+3,4090);
                 SocketSendRsp(fd,msgGetPhotoRsp.ByteSize()+3,send_buffer);
 				break;
 				case LOGOUT_REQ:
-				logoutReq.ParseFromArray(recv_buffer+3,10240);
-				ret = user_svr.UserLogout(logoutReq.user_id(),now);
-				logoutRsp.set_ret(ret);
-                printf("ret:%d\n",ret);
-				sprintf(mess_type_str,"%d",mess_type+1);
-                SetRspMessType(mess_type_str, send_buffer);
-                ret = logoutRsp.SerializeToArray(send_buffer+3,10240);
-                SocketSendRsp(fd,logoutRsp.ByteSize()+3,send_buffer);
+					logoutReq.ParseFromArray(recv_buffer+3,4090);
+					ret = user_svr.UserLogout(logoutReq.user_id(),now);
+					logoutRsp.set_ret(ret);
+					printf("ret:%d\n",ret);
+					sprintf(mess_type_str,"%d",mess_type+1);
+					SetRspMessType(mess_type_str, send_buffer);
+					ret = logoutRsp.SerializeToArray(send_buffer+3,10240);
+					SocketSendRsp(fd,logoutRsp.ByteSize()+3,send_buffer);
+					close(fd);
 				break;
 				case SIGN_OUT_REQ:
-					signoutReq.ParseFromArray(recv_buffer+3,10240);
+					signoutReq.ParseFromArray(recv_buffer+3,4090);
 					ret = user_svr.DeleteUser(signoutReq.user_id());
 					rela_svr.DeleteRela(signoutReq.user_id());
 					db_svr.DeleteMessAndPhoto(signoutReq.user_id());
@@ -307,8 +310,12 @@ void *thread_work(void *arg){
 					printf("signoutRsp ret:%d\n",ret);
 					sprintf(mess_type_str,"%d",mess_type+1);
 					SetRspMessType(mess_type_str, send_buffer);
-					ret = signoutRsp.SerializeToArray(send_buffer+3,10240);
+					ret = signoutRsp.SerializeToArray(send_buffer+3,4090);
                 SocketSendRsp(fd,signoutRsp.ByteSize()+3,send_buffer);
+				break;
+				case SOCKET_EXIT_REQ:
+					user_svr.UserLogout(Fd2UserID[fd],now);
+					printf("socket exit\n");
 				break;
 			default:
 				printf("unknown mess_type: %d\n",mess_type);

@@ -10,6 +10,8 @@ private:
 	GETSETVAR(int,reg_num)
 	GETSETVAR(int,cur_user_id)
     DbManager* db_svr_;
+    std::unordered_map<int,int> user_id_idx;
+    std::unordered_map<string,int> name_idx;
 
 public:
     int Init(DbManager *db_svr);

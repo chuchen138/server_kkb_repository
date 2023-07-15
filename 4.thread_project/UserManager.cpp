@@ -5,33 +5,52 @@
 // #include "mydb.h"
 
 int UserManager::LoginCheck(const char* user_name, const char* password){
-	for(int i=0;i<user_count_;i++){
-		if(strcmp(users[i].user_name(),user_name)==0){
-			if(strcmp(users[i].password(),password)==0){
-				users[i].set_is_online(1);
-				return SUCCESS;
-			}else{
-				return WRONG_PASSWORD;
-			}
+	// for(int i=0;i<user_count_;i++){
+	// 	if(strcmp(users[i].user_name(),user_name)==0){
+	// 		if(strcmp(users[i].password(),password)==0){
+	// 			users[i].set_is_online(1);
+	// 			return SUCCESS;
+	// 		}else{
+	// 			return WRONG_PASSWORD;
+	// 		}
+	// 	}
+	// }
+	int idx = name_idx[user_name]-1;
+	if(idx>=0){
+		if(strcmp(users[idx].password(),password)==0){
+			users[idx].set_is_online(1);
+			return SUCCESS;
+		}else{
+			return WRONG_PASSWORD;
 		}
 	}
 	return USER_NOT_EXIST;
 }
 
 int UserManager::GetUserIdByUserName(const char* user_name){
-        for(int i=0;i<user_count_;i++){
-                if(strcmp(users[i].user_name(),user_name)==0){
-                	return users[i].user_id();
-                }
-        }
+        // for(int i=0;i<user_count_;i++){
+        //         if(strcmp(users[i].user_name(),user_name)==0){
+        //         	return users[i].user_id();
+        //         }
+        // }
+		int idx = name_idx[user_name]-1;
+		if (idx >= 0)
+		{
+			return users[idx].user_id();
+		}
         return USER_NOT_EXIST;
 }
 
 const char* UserManager::GetUserNameByUserId(const int user_id){
-	for(int i=0;i<user_count_;i++){
-		if(users[i].user_id()==user_id){
-			return users[i].user_name();
-		}
+	// for(int i=0;i<user_count_;i++){
+	// 	if(users[i].user_id()==user_id){
+	// 		return users[i].user_name();
+	// 	}
+	// }
+	int idx = user_id_idx[user_id]-1;
+	if (idx >= 0)
+	{
+		return users[idx].user_name();
 	}
     return nullptr;
 }
@@ -55,10 +74,14 @@ int UserManager::Start(){
 	if(ret==SUCCESS){
 		ret=db_svr_->GetUsersOneByOne(&users[ui]);
 		users[ui].set_is_online(0);
+user_id_idx[users[ui].user_id()]=ui+1;
+name_idx[users[ui].user_name()]=ui+1;
 		if(ret==SUCCESS)ui++;
 		while(ret!=DB_NO_MORE_DATA){
 			ret=db_svr_->GetUsersOneByOne(&users[ui]);
 			users[ui].set_is_online(0);
+user_id_idx[users[ui].user_id()]=ui+1;
+name_idx[users[ui].user_name()]=ui+1;
 			if(ret==SUCCESS)ui++;
 		}
 		ret=db_svr_->GetUsersEnd();
@@ -96,23 +119,29 @@ int UserManager::ShowAll(){
 }
 
 UserInfo* UserManager::GetUser(int user_id) {
-	for(int i=0;i<user_count_;i++) {
-		if(users[i].user_id() == user_id) {
-			return &users[i];
-		}
-	}
+	// for(int i=0;i<user_count_;i++) {
+	// 	if(users[i].user_id() == user_id) {
+	// 		return &users[i];
+	// 	}
+	// }
+	int idx = user_id_idx[user_id]-1;
+	if (idx >= 0) return &users[idx];
 	return NULL;
 }
 
 
 int UserManager::CreateUser(const char* user_name,const char* pswd,int from,int time_now) {
-	for(int i=0;i<user_count_;i++){
-		if(strcmp(users[i].user_name(),user_name)==0){
-			printf("USER EXIST %d %s\n",users[i].user_id(),users[i].user_name());
-			return USER_EXIST;
-		}
+	// for(int i=0;i<user_count_;i++){
+	// 	if(strcmp(users[i].user_name(),user_name)==0){
+	// 		printf("USER EXIST %d %s\n",users[i].user_id(),users[i].user_name());
+	// 		return USER_EXIST;
+	// 	}
+	// }
+	int idx = name_idx[user_name]-1;
+	if (idx >= 0) {
+		printf("USER EXIST %d %s\n",users[idx].user_id(),users[idx].user_name());
+		return USER_EXIST;
 	}
-	//int cur_user_id=1;//GetVarUserId();//todo get user_id from tb_var str='user_id';	
 
 	if(user_count_<10239){
 		users[user_count_].set_user_id(cur_user_id());
@@ -122,6 +151,8 @@ int UserManager::CreateUser(const char* user_name,const char* pswd,int from,int 
 		users[user_count_].set_reg_time(time_now);
 		users[user_count_].set_db_flag(FLAG_INSERT);
 		users[user_count_].set_is_online(1);
+user_id_idx[cur_user_id()]=user_count_+1;
+name_idx[user_name]=user_count_+1;
 		user_count_++;
 	}
 	set_cur_user_id(cur_user_id()+1);
@@ -131,13 +162,19 @@ int UserManager::CreateUser(const char* user_name,const char* pswd,int from,int 
 }
 
 int UserManager::DeleteUser(int user_id){
-	for(int i=0;i<user_count_;i++){
-		if(users[i].user_id()==user_id){
-			printf("USER EXIST %d %s\n",users[i].user_id(),users[i].user_name());
-            users[i].set_db_flag(FLAG_DELETE);
-			// users[i].set_user_id(-1);
-			return USER_EXIST;
-		}
+	// for(int i=0;i<user_count_;i++){
+	// 	if(users[i].user_id()==user_id){
+			// printf("USER EXIST %d %s\n",users[i].user_id(),users[i].user_name());
+            // users[i].set_db_flag(FLAG_DELETE);
+			// // users[i].set_user_id(-1);
+			// return USER_EXIST;
+	// 	}
+	// }
+	int idx = user_id_idx[user_id]-1;
+	if (idx >= 0){
+		printf("USER EXIST %d %s\n",users[idx].user_id(),users[idx].user_name());
+		users[idx].set_db_flag(FLAG_DELETE);
+		return USER_EXIST;
 	}
 	return 0;
 }

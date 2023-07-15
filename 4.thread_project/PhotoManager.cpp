@@ -4,10 +4,14 @@
 
 
 PhotoInfo* PhotoManager::GetPhoto(int user_id){
-	for(int i=0;i<photo_count_;i++){
-		if(photos_[i].user_id()==user_id){
-			return &photos_[i];
-		}
+	// for(int i=0;i<photo_count_;i++){
+	// 	if(photos_[i].user_id()==user_id){
+	// 		return &photos_[i];
+	// 	}
+	// }
+	int idx = Id2Photo_map[user_id]-1;
+	if(idx >= 0){
+		return &photos_[idx];
 	}
 	return nullptr;
 }
@@ -16,6 +20,7 @@ int PhotoManager::UpdatePhoto(int user_id,const char* publisher,int publish_time
 	PhotoInfo* photo=GetPhoto(user_id);
 	if(photo==nullptr){
 		photo = &photos_[photo_count()];
+Id2Photo_map[user_id]=photo_count()+1;
 		set_photo_count(photo_count()+1);
 		photo->set_db_flag(FLAG_INSERT);
 		// return PHOTO_NOT_EXIST;
@@ -46,9 +51,11 @@ void PhotoManager::Start(){
 	int ui=0;
 	if(ret==SUCCESS){
 		ret=db_svr_->GetPhotosOneByOne(&photos_[ui]);
+Id2Photo_map[photos_[ui].user_id()]=ui+1;
 		if(ret==SUCCESS)ui++;
 		while(ret!=DB_NO_MORE_DATA){
 			ret=db_svr_->GetPhotosOneByOne(&photos_[ui]);
+Id2Photo_map[photos_[ui].user_id()]=ui+1;
 			if(ret==SUCCESS)ui++;
 		}
 		ret=db_svr_->GetPhotosEnd();

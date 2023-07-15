@@ -11,6 +11,7 @@
 #include "RelationInfo.h"
 #include "PhotoInfo.h"
 #include "MessageInfo.h"
+#include <unordered_map>
 
 using namespace std;
 class DbManager{

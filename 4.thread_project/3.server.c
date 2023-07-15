@@ -105,12 +105,15 @@ int main(int argc, char *argv[]){
                 // 其他套接字，判断是什么操作
                 int ret = recv(fd, recv_buffer[mess_count],4096, 0);
                 if(ret <= 0){
-                    if(ret == 0) DBG(RED "Disconnect\n" NONE);
+                    if(ret == 0) {
+                        DBG(RED "Disconnect\n" NONE);
+                    }
                     epoll_ctl(epollfd, EPOLL_CTL_DEL, fd,NULL);
                     close(fd);
-                    continue;
+                    for(int j = 0; j < 3; ++j)
+                        recv_buffer[mess_count][j] = '9';
                 }
-                DBG(GREEN "<RECV>" NONE " :main fd = %d.\n", fd);
+                if(ret > 0) DBG(GREEN "<RECV>" NONE " :main fd = %d.\n", fd);
                 // DBG(GREEN "<RECV>" NONE " : recvbuff = [%s]\n", recv_buffer[mess_count]);
                 task_queue_push(tq, recv_buffer[mess_count],fd);
                 mess_count++;
